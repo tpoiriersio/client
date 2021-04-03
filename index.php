@@ -132,6 +132,7 @@
       <svg class="bi me-2" width="16" height="16"><use xlink:href="#comment"/></svg>
       <svg class="bi me-2" width="16" height="16"><use xlink:href="#share"/></svg>
     </div>
+    
   </div>
 
 <?php } ?>
