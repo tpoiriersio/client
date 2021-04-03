@@ -7,13 +7,16 @@
   right: 0;
 }
 
+.placementPublication{
+  margin-top: 20px;
+}
+
 body {
   display: flex;
   flex-wrap: nowrap;
   height: 100vh;
   height: -webkit-fill-available;
   overflow-x: auto;
-  overflow-y: hidden;
 }
 body > * {
   flex-shrink: 0;
