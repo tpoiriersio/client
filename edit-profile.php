@@ -6,9 +6,12 @@
     $loader = new FilesystemLoader(__DIR__ . '/templates');
     $twig = new Environment($loader);
 
-    echo $twig->render('index.tpl', [
-        'titre_page' => 'Index',
+    echo $twig->render('edit-profile.tpl', [
+        'titre_page' => 'Éditer mon profil',
         'prenom' => 'John',
-        'nom' => 'Doe'
+        'nom' => 'Doe',
+        'role' => 'Citoyen',
+        'pays' => 'France',
+        'email' => 'johndoe@gmail.com'
     ]);
     ?>

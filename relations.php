@@ -6,9 +6,11 @@
     $loader = new FilesystemLoader(__DIR__ . '/templates');
     $twig = new Environment($loader);
 
-    echo $twig->render('index.tpl', [
-        'titre_page' => 'Index',
+    echo $twig->render('relations.tpl', [
+        'titre_page' => 'Relations',
         'prenom' => 'John',
-        'nom' => 'Doe'
+        'nom' => 'Doe',
+        'role' => 'Citoyen',
+        'pays' => 'France'
     ]);
     ?>
