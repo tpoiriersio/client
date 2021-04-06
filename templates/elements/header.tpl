@@ -16,6 +16,7 @@
     <link href="css/sidebars.css" rel="stylesheet">
     <link href="css/profile.css" rel="stylesheet">
     <link href="css/relations.css" rel="stylesheet">
+    <link href="css/messages.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -61,6 +62,9 @@
     </symbol>
     <symbol id="share" viewBox="0 0 16 16">
         <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+    </symbol>
+    <symbol id="send" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
     </symbol>
 </svg>
 
