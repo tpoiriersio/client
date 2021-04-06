@@ -1,0 +1,15 @@
+.user-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+.relation-card a {
+  text-decoration: none;
+  color: black;
+  padding-right: 10px;
+}
+.bouton-relation svg {
+  width: 25px;
+}
+/*# sourceMappingURL=relations.css.map */

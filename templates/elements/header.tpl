@@ -6,13 +6,16 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.82.0">
-    <title>Sidebars · Bootstrap v5.0</title>
+    <title>{{ titre_page }} | ResRel</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
 
     <!-- Bootstrap core CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="sidebars.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/sidebars.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
+    <link href="css/relations.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -60,3 +63,6 @@
         <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
     </symbol>
 </svg>
+
+<div class="container-fluid">
+    <div class="row page-content">
