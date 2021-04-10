@@ -6,7 +6,7 @@
     $loader = new FilesystemLoader(__DIR__ . '/templates');
     $twig = new Environment($loader);
 
-    echo $twig->render('index.tpl', [
+    echo $twig->render('home.tpl', [
         'titre_page' => 'Home',
         'prenom' => 'John',
         'nom' => 'Doe'

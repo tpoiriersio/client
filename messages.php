@@ -7,7 +7,7 @@
     $twig = new Environment($loader);
 
     echo $twig->render('messages.tpl', [
-        'titre_page' => 'Index',
+        'titre_page' => 'Messages',
         'prenom' => 'John',
         'nom' => 'Doe'
     ]);

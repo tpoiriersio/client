@@ -1,12 +1,12 @@
 <div class="col-md-2 order-1 left-sidebar bg-dark">
     <div class="d-flex flex-column p-3 text-white sticky-top">
-        <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <a href="home.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             {{ include('elements/logo-svg.tpl') }}
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="index.php" class="nav-link active">
+                <a href="home.php" class="nav-link active">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
                     Accueil
                 </a>
