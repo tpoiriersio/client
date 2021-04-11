@@ -1,18 +1,6 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
 {{ include('elements/header.tpl') }}
 
-<!DOCTYPE html><html class=''>
-<head>
-
-<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-
-</style>
-</head>
-<body>
     <div class="login">
         <div class="wrap">
             <div id="toggle-wrap">
@@ -158,8 +146,8 @@ $(function() {
 
 </script>
 
-</body>
-</html>
+{{ include('elements/footer.tpl') }}
+
 
 
 

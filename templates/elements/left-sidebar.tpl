@@ -40,9 +40,9 @@
                 <li><a class="dropdown-item" href="#">Nouvelle ressource</a></li>
 
                 <!-- AJOUTER IF EN FONCTION DU GROUPE AFFICHER ADMINISTRATION OU NON -->
-                <li><a class="dropdown-item" href="#">Administration</a></li>
+                <li><a class="dropdown-item" href="admin.php">Administration</a></li>
 
-                <li><a class="dropdown-item" href="#">Profil</a></li>
+                <li><a class="dropdown-item" href="profile.php">Profil</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#">Se déconnecter</a></li>
             </ul>
