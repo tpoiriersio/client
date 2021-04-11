@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container colorwhite">
     <div id="profile-header" class="row justify-content-start">
         <div class="col-md-2">
             <img src="assets/media/upload/images/palpatine_glasses.jpg" class="header-avatar">
