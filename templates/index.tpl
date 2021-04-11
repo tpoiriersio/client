@@ -1,6 +1,6 @@
 
 {{ include('elements/header.tpl') }}
-
+<body class="bodyIndex">
     <div class="login">
         <div class="wrap">
             <div id="toggle-wrap">
@@ -61,7 +61,7 @@
             </div>
         </div>
     </div>
-
+</body>
 <script>
 $(function() {
 	var tab = $('.tabs h3 a');
