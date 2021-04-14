@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
-    {% for i in 0..5 %}
+    {% for key, user in userslist.utilisateurs %}
         <div class="col-md-6">
             <div class="card placementPublication relation-card">
                 <h5 class="card-header">
                     <img src="assets/media/upload/images/homer.jpg" class="rounded-circle user-pic">
-                    <strong>Jane Doe</strong>
+                    <strong>{{ user.prenomuser }} {{ user.nomuser }}</strong>
                 </h5>
                 <div class="card-body">
                     <a href="" title="Voir le profil" class="bouton-relation">
