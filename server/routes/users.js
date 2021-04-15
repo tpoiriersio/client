@@ -37,8 +37,8 @@ router.post("/inscription", validForm, async (req, res) => {
       return res.status(401).send("Utilisateur déjà existant");
     } else {
       //Si c'est un nouvel utilisateur valide, on sale son mot de passe
-      //const salt = await bcrypt.genSalt(10);
-      //const saltMdp = await bcrypt.hash(mdp, salt);
+      const salt = await bcrypt.genSalt(10);
+      const saltMdp = await bcrypt.hash(mdp, salt);
 
       //On peut maintenant enregistrer le nouvel utilisateur avec un mot de passe salé
       const result = await db.query(
@@ -55,7 +55,7 @@ router.post("/inscription", validForm, async (req, res) => {
         isAdmin,
         isSuperAdmin,
         isModerateur) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, false, false, false) RETURNING *`,
-        [email, mdp, nom, prenom, tel, adresse, pays, situation, handicap]
+        [email, saltMdp, nom, prenom, tel, adresse, pays, situation, handicap]
       );
 
       return res.json({ user: result.rows[0].emailuser });
@@ -82,8 +82,8 @@ router.post("/connexion", validForm, async (req, res) => {
       return res.status(401).json("Informations invalides");
     }
     //si oui, on compare le mot de passe entré avec le mot de passe salé dans la bdd
-    //bcrypt.compare(mdp, user.rows[0].mdpuser, (err, same) => {
-    if (user.rows[0].mdpuser == mdp) {
+    bcrypt.compare(mdp, user.rows[0].mdpuser, (err, same) => {
+    if (same) {
       //si tout est bon on lui génère un token de connexion et on l'envoie côté client
       const jwtToken = jwtGenerator(
         user.rows[0].iduser,
@@ -95,7 +95,7 @@ router.post("/connexion", validForm, async (req, res) => {
     } else {
       return res.status(401).json("Informations invalides");
     }
-    //});
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
