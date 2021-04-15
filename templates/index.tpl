@@ -37,9 +37,9 @@
                     </div>
                     <div class="tabs-content">
                         <div id="login-tab-content" class="active">
-                            <form class="login-form" action="" method="post">
-                                <input type="text" class="input" id="user_login" autocomplete="off" placeholder="Adresse email">
-                                <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Mot de passe">
+                            <form class="login-form" action="http://localhost:5000/users/connexion" method="POST">
+                                <input type="email" class="input" id="user_email" name="email" autocomplete="off" placeholder="Adresse email">
+                                <input type="password" class="input" id="user_pass" name="mdp" autocomplete="off" placeholder="Mot de passe">
                                 <input type="checkbox" class="checkbox" checked id="remember_me">
                                 <label for="remember_me">Se souvenir de moi</label>
                                 <input type="submit" class="button" value="Se connecter">
@@ -49,10 +49,17 @@
                             </div>
                         </div>
                         <div id="signup-tab-content">
-                            <form class="signup-form" action="" method="post">
-                                <input type="email" class="input" id="user_email" autocomplete="off" placeholder="Adresse email">
-                                <input type="text" class="input" id="user_name" autocomplete="off" placeholder="Nom d'utilisateur">
-                                <input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Mot de passe">
+                            <form class="signup-form" action="http://localhost:5000/users/inscription" method="POST">
+                                <input type="email" class="input" id="user_email" name="email" autocomplete="off" placeholder="Adresse email">
+                                <input type="text" class="input" id="user_surname" name="nom" autocomplete="off" placeholder="Nom">
+                                <input type="text" class="input" id="user_name" name="prenom" autocomplete="off" placeholder="Prénom">
+                                <input type="password" class="input" id="user_pass" name="mdp" autocomplete="off" placeholder="Mot de passe">
+                                <!--<input type="number" class="input" id="user_tel" name="tel" autocomplete="off" placeholder="Téléphone">
+                                <input type="text" class="input" id="user_address" name="adresse" autocomplete="off" placeholder="Adresse">
+                                <input type="text" class="input" id="user_country" name="pays" autocomplete="off" placeholder="Pays">
+                                <input type="text" class="input" id="user_situation" name="situation" autocomplete="off" placeholder="Situation">
+                                <input type="text" class="input" id="user_handicap" name="handicap" autocomplete="off" placeholder="Handicap">-->
+
                                 <input type="submit" class="button" value="S'inscrire">
                             </form>
                         </div>
@@ -83,7 +90,7 @@ $(function() {
 	};
 }(jQuery));
 
-$(function() {
+/*$(function() {
 	$('.agree,.forgot, #toggle-terms, .log-in, .sign-up').on('click', function(event) {
 		event.preventDefault();
 		var terms = $('.terms'),
@@ -142,7 +149,7 @@ $(function() {
 		event.preventDefault();
 		return false;
 	});
-});
+});*/
 
 </script>
 
