@@ -37,12 +37,12 @@
                     </div>
                     <div class="tabs-content">
                         <div id="login-tab-content" class="active">
-                            <form class="login-form" action="http://localhost:5000/users/connexion" method="POST">
+                            <form class="login-form" method="POST">
                                 <input type="email" class="input" id="user_email" name="email" autocomplete="off" placeholder="Adresse email">
                                 <input type="password" class="input" id="user_pass" name="mdp" autocomplete="off" placeholder="Mot de passe">
                                 <input type="checkbox" class="checkbox" checked id="remember_me">
                                 <label for="remember_me">Se souvenir de moi</label>
-                                <input type="submit" class="button" value="Se connecter">
+                                <input type="submit" class="button" value="Se connecter" onclick="connexion()">
                             </form>
                             <div class="help-action">
                                 <p><i class="fa fa-arrow-left" aria-hidden="true"></i><a class="forgot" href="#">Mot de passe oublié ?</a></p>
@@ -54,11 +54,11 @@
                                 <input type="text" class="input" id="user_surname" name="nom" autocomplete="off" placeholder="Nom">
                                 <input type="text" class="input" id="user_name" name="prenom" autocomplete="off" placeholder="Prénom">
                                 <input type="password" class="input" id="user_pass" name="mdp" autocomplete="off" placeholder="Mot de passe">
-                                <!--<input type="number" class="input" id="user_tel" name="tel" autocomplete="off" placeholder="Téléphone">
+                                <input type="phone" class="input" id="user_tel" name="tel" autocomplete="off" placeholder="Téléphone">
                                 <input type="text" class="input" id="user_address" name="adresse" autocomplete="off" placeholder="Adresse">
                                 <input type="text" class="input" id="user_country" name="pays" autocomplete="off" placeholder="Pays">
                                 <input type="text" class="input" id="user_situation" name="situation" autocomplete="off" placeholder="Situation">
-                                <input type="text" class="input" id="user_handicap" name="handicap" autocomplete="off" placeholder="Handicap">-->
+                                <input type="checkbox" class="input" id="user_handicap" name="handicap" autocomplete="off" placeholder="Handicap">
 
                                 <input type="submit" class="button" value="S'inscrire">
                             </form>
@@ -89,6 +89,20 @@ $(function() {
 		return this;
 	};
 }(jQuery));
+
+function connexion(){
+    $.ajax({
+        url : 'http://localhost:5000/users/connexion',
+        type : 'POST', 
+        dataType : 'JSON',
+        success : function(json, statut){
+            console.log(json);
+        }
+        error : function(resultat, statut, erreur){
+            console.log("erreur");
+        }
+    });
+}
 
 /*$(function() {
 	$('.agree,.forgot, #toggle-terms, .log-in, .sign-up').on('click', function(event) {

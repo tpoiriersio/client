@@ -82,20 +82,20 @@ router.post("/connexion", validForm, async (req, res) => {
       return res.status(401).json("Informations invalides");
     }
     //si oui, on compare le mot de passe entré avec le mot de passe salé dans la bdd
-    bcrypt.compare(mdp, user.rows[0].mdpuser, (err, same) => {
-      if (same) {
-        //si tout est bon on lui génère un token de connexion et on l'envoie côté client
-        const jwtToken = jwtGenerator(
-          user.rows[0].iduser,
-          user.rows[0].isadmin,
-          user.rows[0].issuperadmin,
-          user.rows[0].ismoderateur
-        );
-        return res.json({ jwtToken });
-      } else {
-        return res.status(401).json("Informations invalides");
-      }
-    });
+    //bcrypt.compare(mdp, user.rows[0].mdpuser, (err, same) => {
+    if (user.rows.length === 1) {
+      //si tout est bon on lui génère un token de connexion et on l'envoie côté client
+      const jwtToken = jwtGenerator(
+        user.rows[0].iduser,
+        user.rows[0].isadmin,
+        user.rows[0].issuperadmin,
+        user.rows[0].ismoderateur
+      );
+      return res.json({ jwtToken });
+    } else {
+      return res.status(401).json("Informations invalides");
+    }
+    //});
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
