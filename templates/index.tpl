@@ -42,7 +42,7 @@
                                 <input type="password" class="input" id="user_pass" name="mdp" autocomplete="off" placeholder="Mot de passe">
                                 <input type="checkbox" class="checkbox" checked id="remember_me">
                                 <label for="remember_me">Se souvenir de moi</label>
-                                <input type="submit" class="button" value="Se connecter" onclick="connexion()">
+                                <input type="button" class="button" value="Se connecter" onclick="connexion()">
                             </form>
                             <div class="help-action">
                                 <p><i class="fa fa-arrow-left" aria-hidden="true"></i><a class="forgot" href="#">Mot de passe oublié ?</a></p>
@@ -50,10 +50,10 @@
                         </div>
                         <div id="signup-tab-content">
                             <form class="signup-form" action="http://localhost:5000/users/inscription" method="POST">
-                                <input type="email" class="input" id="user_email" name="email" autocomplete="off" placeholder="Adresse email">
+                                <input type="email" class="input" id="user_emailinscription" name="email" autocomplete="off" placeholder="Adresse email">
                                 <input type="text" class="input" id="user_surname" name="nom" autocomplete="off" placeholder="Nom">
                                 <input type="text" class="input" id="user_name" name="prenom" autocomplete="off" placeholder="Prénom">
-                                <input type="password" class="input" id="user_pass" name="mdp" autocomplete="off" placeholder="Mot de passe">
+                                <input type="password" class="input" id="user_passinscription" name="mdp" autocomplete="off" placeholder="Mot de passe">
                                 <input type="phone" class="input" id="user_tel" name="tel" autocomplete="off" placeholder="Téléphone">
                                 <input type="text" class="input" id="user_address" name="adresse" autocomplete="off" placeholder="Adresse">
                                 <input type="text" class="input" id="user_country" name="pays" autocomplete="off" placeholder="Pays">
@@ -91,16 +91,29 @@ $(function() {
 }(jQuery));
 
 function connexion(){
+    var email = $("#user_email").val();
+    var mdp = $("#user_pass").val();
     $.ajax({
         url : 'http://localhost:5000/users/connexion',
-        type : 'POST', 
+        type : 'POST',
+        data: {
+        "email": email,
+        "mdp": mdp,
+        },
         dataType : 'JSON',
-        success : function(json, statut){
-            console.log(json);
-        }
-        error : function(resultat, statut, erreur){
-            console.log("erreur");
-        }
+        success : function(json){
+            $.ajax({
+                url : 'login.php',
+                type : 'POST',
+                data: {
+                "json": json,
+                },
+                dataType : 'html',
+                success : function(html){
+                    window.location.href = './home.php';
+                },
+            });
+        },
     });
 }
 

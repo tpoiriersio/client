@@ -1,3 +1,4 @@
+
 <div class="col-md-2 order-1 left-sidebar bg-dark">
     <div class="d-flex flex-column p-3 text-white sticky-top">
         <a href="home.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -34,7 +35,7 @@
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-                <strong>{{ prenom }} {{ nom }}</strong>
+                <strong>{{ app.session.get('token') }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                 <li><a class="dropdown-item" href="#">Nouvelle ressource</a></li>
