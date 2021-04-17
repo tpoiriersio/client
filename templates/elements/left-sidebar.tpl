@@ -38,14 +38,14 @@
                 <strong>{{ app.session.get('token') }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="#">Nouvelle ressource</a></li>
+                <li><a class="dropdown-item" href="resources-new">Nouvelle ressource</a></li>
 
                 <!-- AJOUTER IF EN FONCTION DU GROUPE AFFICHER ADMINISTRATION OU NON -->
                 <li><a class="dropdown-item" href="admin.php">Administration</a></li>
 
                 <li><a class="dropdown-item" href="profile.php">Profil</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Se déconnecter</a></li>
+                <li><a class="dropdown-item" href="logout.php">Se déconnecter</a></li>
             </ul>
         </div>
     </div>

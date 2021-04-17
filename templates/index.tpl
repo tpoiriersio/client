@@ -102,17 +102,8 @@ function connexion(){
         },
         dataType : 'JSON',
         success : function(json){
-            $.ajax({
-                url : 'login.php',
-                type : 'POST',
-                data: {
-                "json": json,
-                },
-                dataType : 'html',
-                success : function(html){
-                    window.location.href = './home.php';
-                },
-            });
+            $jsonstring = JSON.stringify(json);
+            window.location.href = './login.php?token=' + $jsonstring;
         },
     });
 }

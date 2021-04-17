@@ -5,10 +5,9 @@
 
     $loader = new FilesystemLoader(__DIR__ . '/templates');
     $twig = new Environment($loader);
-    session_start();
 
-    echo $twig->render('home.tpl', [
-        'titre_page' => 'Home',
+    echo $twig->render('resources-new.tpl', [
+        'titre_page' => 'Nouvelle ressource',
         'prenom' => 'John',
         'nom' => 'Doe'
     ]);
