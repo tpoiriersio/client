@@ -1,9 +1,9 @@
 <div class="container">
-    {% for i in 0..7 %}
+    <!--{% for key, ressource in resourcesList.ressources %}-->
     <div class="card placementPublication">
         <h5 class="card-header">
             <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-            <strong>PSEUDO</strong>
+            <strong><!--{{ ressource.titreressource }}--></strong>
         </h5>
         <div class="card-body">
             <h5 class="card-title">Titre de la ressource</h5>
@@ -34,6 +34,6 @@
             </a>
         </div>
     </div>
-    {% endfor %}
+    <!--{% endfor %}-->
 
 </div>
