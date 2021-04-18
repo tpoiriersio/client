@@ -21,27 +21,27 @@
         <button type="" class="btn btn-primary">Supprimer l'image</button>-->
         <div class="mb-3">
             <label for="inputEmail" class="form-label">Adresse email</label>
-            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" value="">
+            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
             <label for="inputPrenom" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="inputPrenom" value="">
+            <input type="text" class="form-control" id="inputPrenom" >
         </div>
         <div class="mb-3">
             <label for="inputNom" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="inputNom" value="">
+            <input type="text" class="form-control" id="inputNom" >
         </div>
         <div class="mb-3">
             <label for="inputTel" class="form-label">Téléphone</label>
-            <input type="text" class="form-control" id="inputTel" value="">
+            <input type="text" class="form-control" id="inputTel">
         </div>
         <div class="mb-3">
             <label for="inputPays" class="form-label">Pays</label>
-            <input type="text" class="form-control" id="inputPays" value="">
+            <input type="text" class="form-control" id="inputPays">
         </div>
         <div class="mb-3">
             <label for="inputSituation" class="form-label">Situation familiale</label>
-            <input type="text" class="form-control" id="inputSituation" value="">
+            <input type="text" class="form-control" id="inputSituation">
         </div>
         <div class="mb-3">
             <label for="inputPassword1" class="form-label">Mot de passe</label>
@@ -61,6 +61,9 @@
 </div>
 
 <script>
+
+$( document ).ready(function() {
+
     //on récupére l'id passé en URL pour ensuite l'envoyer
     var searchParams = new URLSearchParams(window.location.search);
     searchParams.has('id') ;
@@ -68,15 +71,15 @@
 
     var token = $("#token").val();
     var tokenParse = JSON.parse(token);
-    console.log(tokenParse.jwtToken);
+    
     //alert(tokenParse.jwtToken);
 
-    $.ajax({
-        url : 'http://localhost:5000/users/'+id,
+    /*$.ajax({
+        url : 'http://localhost:5000/users/'+ id,
         type : 'GET',
         dataType : 'json',
         success : function(json){
-            console.log(json);
+            //console.log(json);
             $('#inputNom').val(json.utilisateur.nomuser);
             $('#inputPrenom').val(json.utilisateur.prenomuser);
             $('#inputPays').val(json.utilisateur.paysuser);
@@ -84,36 +87,38 @@
             $('#inputTel').val(json.utilisateur.teluser);
             $('#inputSituation').val(json.utilisateur.situationuser);
         },
-    });
-
-    var email = $("#inputEmail").val();
-    var prenom = $("#inputPrenom").val();
-    var nom = $("#inputNom").val();
-    var tel = $("#inputTel").val();
-    var pays = $("#inputPays").val();
-    var sitation = $("#inputSituation").val();
-    var mdp = $("#inputPassword2").val();
+    });*/
 
     $("#register").click(function() {
-        //alert(userId);
+        var email = $("#inputEmail").val();
+        var prenom = $("#inputPrenom").val();
+        var nom = $("#inputNom").val();
+        var tel = $("#inputTel").val();
+        var pays = $("#inputPays").val();
+        var sitation = $("#inputSituation").val();
+        var mdp = $("#inputPassword2").val();
+
+        console.log(id);
+        
         $.ajax({
-            url : 'http://localhost:5000/users/update/'+ id,
-            headers: {
-                'Accept':'application/json',
-                'Content-Type':'application/json',
-                'Authorization':'Bearer ' + tokenParse.jwtToken
-            },
-            type : 'PUT',
             data: {
             "email": email,
             "prenom": prenom,
             "nom": nom,
             "tel": tel,
-            "pays":pays,
+            "pays": pays,
             "sitation": sitation,
-            "mdp": mdp
+            //"mdp": mdp
             //"token": ,
             },
+            url : 'http://localhost:5000/users/update/'+ id,
+            headers: {
+            'Accept':'application/json',
+            'Content-Type':'application/json',
+            'Authorization':'Bearer ' + tokenParse.jwtToken
+            },
+            type : 'PUT',
+            
             dataType : 'json',
             success : function(json){
                 //$("#fetchUsers").load(" #fetchUsers"); 
@@ -121,8 +126,8 @@
             },
         });
     });
-
-
+});
+    
 </script>
 
 {{ include('elements/right-sidebar.tpl') }}

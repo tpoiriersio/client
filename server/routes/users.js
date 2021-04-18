@@ -136,29 +136,29 @@ router.put("/update/:id", userAuth, async (req, res) => {
     if (req.idUser === req.params.id || req.isAdmin || req.isSuperAdmin) {
       const {
         email,
-        mdp,
+        //mdp,
         nom,
         prenom,
         tel,
         adresse,
         pays,
         situation,
-        handicap,
+        //handicap,
       } = req.body;
       const result = await db.query(
         `UPDATE utilisateur SET
-            emailUser = $1,mdpUser = $2, nomUser = $3, prenomUser = $4, telUser = $5,
-            adresseUser = $6, paysUser = $7, situationUser = $8, handicapUser = $9 WHERE idUser = $10 RETURNING *`,
+            emailUser = $1 nomUser = $2, prenomUser = $3, telUser = $4,
+            adresseUser = $5, paysUser = $6, situationUser = $7 WHERE idUser = $8 RETURNING *`,
         [
           email,
-          mdp,
+          //mdp,
           nom,
           prenom,
           tel,
           adresse,
           pays,
           situation,
-          handicap,
+          //handicap,
           req.params.id,
         ]
       );
