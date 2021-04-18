@@ -2,7 +2,7 @@
 
 session_start();
 
-if (session_status() != PHP_SESSION_NONE) {
+if (isset ($_SESSION['jwtToken'])) {
     unset($_SESSION['jwtToken']);
     unset($_SESSION['token']);
     session_unset();
@@ -12,4 +12,8 @@ if (session_status() != PHP_SESSION_NONE) {
 else {
     header('Location: home.php');
 }
+
+
+
+
 

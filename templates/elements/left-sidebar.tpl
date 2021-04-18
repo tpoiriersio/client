@@ -35,17 +35,19 @@
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-                <strong>{{ app.session.get('token') }}</strong>
+                <strong>{% if isConnected == true %} {{ user.utilisateur.prenomuser }} {% else %} Visiteur {% endif %} </strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                {% if isConnected == true %}
                 <li><a class="dropdown-item" href="resources-new">Nouvelle ressource</a></li>
-
+                <li><a class="dropdown-item" href="profile.php">Profil</a></li>
                 <!-- AJOUTER IF EN FONCTION DU GROUPE AFFICHER ADMINISTRATION OU NON -->
                 <li><a class="dropdown-item" href="admin.php">Administration</a></li>
-
-                <li><a class="dropdown-item" href="profile.php">Profil</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="logout.php">Se déconnecter</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="index.php">Se connecter ou s'inscrire</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

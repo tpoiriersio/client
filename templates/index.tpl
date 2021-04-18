@@ -103,7 +103,7 @@ function connexion(){
         dataType : 'JSON',
         success : function(json){
             $jsonstring = JSON.stringify(json);
-            window.location.href = './login.php?token=' + $jsonstring;
+            window.location.href = './login.php?token=' + $jsonstring + '&email=' + email;
         },
     });
 }

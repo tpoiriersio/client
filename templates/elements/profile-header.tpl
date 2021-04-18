@@ -4,19 +4,19 @@
             <img src="assets/media/upload/images/palpatine_glasses.jpg" class="header-avatar">
         </div>
         <div class="col-md-2 col-name">
-            <p class="name"><b>{{ user.utilisateur.prenomuser }} {{ user.utilisateur.nomuser }}</b><br></p>
+            <p class="name"><b>{{ profile.utilisateur.prenomuser }} {{ profile.utilisateur.nomuser }}</b><br></p>
             <p>
-                {% if user.utilisateur.issuperadmin == true %}
+                {% if profile.utilisateur.issuperadmin == true %}
                 Super Administrateur
-                {% elseif user.utilisateur.isadmin == true %}
+                {% elseif profile.utilisateur.isadmin == true %}
                 Administrateur
-                {% elseif user.utilisateur.ismoderateur == true %}
+                {% elseif profile.utilisateur.ismoderateur == true %}
                 Modérateur
                 {% else %}
                 Citoyen
                 {% endif %}
                 <br></p>
-            <p>{{ user.utilisateur.paysuser }}<br></p>
+            <p>{{ profile.utilisateur.paysuser }}<br></p>
         </div>
     </div>
 
