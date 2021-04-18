@@ -21,27 +21,27 @@
         <button type="" class="btn btn-primary">Supprimer l'image</button>-->
         <div class="mb-3">
             <label for="inputEmail" class="form-label">Adresse email</label>
-            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" value="{{ email }}">
+            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" value="">
         </div>
         <div class="mb-3">
             <label for="inputPrenom" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="inputPrenom" value="{{ prenom }}">
+            <input type="text" class="form-control" id="inputPrenom" value="">
         </div>
         <div class="mb-3">
             <label for="inputNom" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="inputNom" value="{{ nom }}">
+            <input type="text" class="form-control" id="inputNom" value="">
         </div>
         <div class="mb-3">
             <label for="inputTel" class="form-label">Téléphone</label>
-            <input type="text" class="form-control" id="inputTel" value="{{ tel }}">
+            <input type="text" class="form-control" id="inputTel" value="">
         </div>
         <div class="mb-3">
             <label for="inputPays" class="form-label">Pays</label>
-            <input type="text" class="form-control" id="inputPays" value="{{ pays }}">
+            <input type="text" class="form-control" id="inputPays" value="">
         </div>
         <div class="mb-3">
             <label for="inputSituation" class="form-label">Situation familiale</label>
-            <input type="text" class="form-control" id="inputSituation" value="{{ situation }}">
+            <input type="text" class="form-control" id="inputSituation" value="">
         </div>
         <div class="mb-3">
             <label for="inputPassword1" class="form-label">Mot de passe</label>
@@ -53,9 +53,10 @@
         </div>
 
         <button class="btn btn-danger">Supprimer l'utilisateur</button>
-        <button type="submit" class="btn btn-primary" id="register">Enregistrer</button>
+        <button type="button" class="btn btn-primary" id="register">Enregistrer</button>
     </form>
-    </div>  
+    </div>
+    <input type="hidden" id="token" value="{{ token }}">  
 
 </div>
 
@@ -64,6 +65,26 @@
     var searchParams = new URLSearchParams(window.location.search);
     searchParams.has('id') ;
     var id = searchParams.get('id');
+
+    var token = $("#token").val();
+    var tokenParse = JSON.parse(token);
+    console.log(tokenParse.jwtToken);
+    //alert(tokenParse.jwtToken);
+
+    $.ajax({
+        url : 'http://localhost:5000/users/'+id,
+        type : 'GET',
+        dataType : 'json',
+        success : function(json){
+            console.log(json);
+            $('#inputNom').val(json.utilisateur.nomuser);
+            $('#inputPrenom').val(json.utilisateur.prenomuser);
+            $('#inputPays').val(json.utilisateur.paysuser);
+            $('#inputEmail').val(json.utilisateur.emailuser);
+            $('#inputTel').val(json.utilisateur.teluser);
+            $('#inputSituation').val(json.utilisateur.situationuser);
+        },
+    });
 
     var email = $("#inputEmail").val();
     var prenom = $("#inputPrenom").val();
@@ -76,10 +97,14 @@
     $("#register").click(function() {
         //alert(userId);
         $.ajax({
-            url : 'http://localhost:5000/users/update/:id',
+            url : 'http://localhost:5000/users/update/'+ id,
+            headers: {
+                'Accept':'application/json',
+                'Content-Type':'application/json',
+                'Authorization':'Bearer ' + tokenParse.jwtToken
+            },
             type : 'PUT',
             data: {
-            "id": id,
             "email": email,
             "prenom": prenom,
             "nom": nom,
@@ -89,8 +114,8 @@
             "mdp": mdp
             //"token": ,
             },
-            dataType : 'html',
-            success : function(html){
+            dataType : 'json',
+            success : function(json){
                 //$("#fetchUsers").load(" #fetchUsers"); 
                 console.log("utilisateur modifié");
             },

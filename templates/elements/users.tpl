@@ -48,15 +48,15 @@
 $(".deleteUtilisateur").click(function() {
     var userId = $(this).children(".valueUser").val();
     var token = $("#token").val();
-    //var tokenParse = JSON.parse(token);
+    var tokenParse = JSON.parse(token);
     //alert(userId);
-    //console.log(token);
+    console.log(tokenParse.jwtToken);
     $.ajax({
-        url : 'http://localhost:5000/users/delete/'+userId,
+        url : 'http://localhost:5000/users/delete/'+ userId,
         headers: {
         'Accept':'application/json',
         'Content-Type':'application/json',
-        'Authorization':'Bearer ' + token
+        'Authorization':'Bearer ' + tokenParse.jwtToken
         },
         type : 'DELETE',
         /*data: {
@@ -68,7 +68,5 @@ $(".deleteUtilisateur").click(function() {
         },
     });
 });
-
-
 
 </script>
