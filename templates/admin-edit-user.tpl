@@ -80,13 +80,13 @@
             type : 'PUT',
             data: {
             "id": id,
-            "email" = email,
-            "prenom" = prenom,
-            "nom" = nom,
-            "tel" = tel,
-            "pays" = pays,
-            "sitation" = sitation,
-            "mdp" = mdp
+            "email": email,
+            "prenom": prenom,
+            "nom": nom,
+            "tel": tel,
+            "pays":pays,
+            "sitation": sitation,
+            "mdp": mdp
             //"token": ,
             },
             dataType : 'html',

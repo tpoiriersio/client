@@ -51,3 +51,29 @@
 
 {{ include('elements/footer.tpl') }}
 
+<script>
+$( document ).ready(function() {
+   //on récupére l'id passé en URL pour ensuite l'envoyer
+    var searchParams = new URLSearchParams(window.location.search);
+    searchParams.has('id') ;
+    var id = searchParams.get('id');
+
+    $.ajax({
+            url : 'http://localhost:5000/users/'+id,
+            type : 'GET',
+            /*data: {
+            "id": id,
+            },*/
+            dataType : 'json',
+            success : function(json){
+                console.log(json);
+                $('#inputNom').val(json.utilisateur.nomuser);
+                $('#inputPrenom').val(json.utilisateur.prenomuser);
+                $('#inputPays').val(json.utilisateur.paysuser);
+                $('#inputEmail').val(json.utilisateur.emailuser);
+            },
+        });
+    
+});
+
+</script>

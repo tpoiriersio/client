@@ -50,14 +50,18 @@ $(".deleteUtilisateur").click(function() {
     var token = $("#token").val();
     //var tokenParse = JSON.parse(token);
     //alert(userId);
-    console.log(token);
+    //console.log(token);
     $.ajax({
-        url : 'http://localhost:5000/users/delete/:id',
-        headers: {Authorization: 'Bearer '+ token},
-        type : 'DELETE',
-        data: {
-        "id": userId,
+        url : 'http://localhost:5000/users/delete/'+userId,
+        headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json',
+        'Authorization':'Bearer ' + token
         },
+        type : 'DELETE',
+        /*data: {
+        "id": userId,
+        },*/
         dataType : 'json',
         success : function(json){
             console.log(json);
