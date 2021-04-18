@@ -9,6 +9,7 @@
         'titre_page' => 'Utilisateurs',
         'isConnected' => $isConnected,
         'user' => $user,
-        'userslist' => $userslist
+        'userslist' => $userslist,
+        'token' => $_SESSION['jwtToken']
     ]);
     ?>

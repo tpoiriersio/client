@@ -35,6 +35,7 @@
                     </a>
                 </div>
             </div>
+            <input type="hidden" id="token" value="{{ token }}">
         </div>
     {% endfor %}
     </div>
@@ -45,18 +46,21 @@
 
 $(".deleteUtilisateur").click(function() {
     var userId = $("#valueUser").val();
-    //alert(userId);
+    var token = $("#token").val();
+    //alert(token);
+    console.log(token);
     $.ajax({
         url : 'http://localhost:5000/users/delete/:id',
+        headers: {"jwtToken": token},
         type : 'DELETE',
         data: {
         "id": userId,
-        //"token": ,
+        //"jwtToken": token,
         },
         dataType : 'html',
         success : function(html){
-            $("#fetchUsers").load(" #fetchUsers"); 
-            console.log("utilisateur supprimé");
+            //$("#fetchUsers").load(" #fetchUsers"); 
+            //console.log("utilisateur supprimé");
         },
     });
 });
