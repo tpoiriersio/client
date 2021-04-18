@@ -10,7 +10,7 @@
                     </a>
                 </h5>
                 <div class="card-body">
-                    <a href="profile.php?id={{user.iduser}}" title="Voir le profil" class="bouton-relation">
+                    <a href="profile.php?id={{user.iduser}}" title="Voir le profil" class="bouton-relation" id="profilUser">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -22,7 +22,7 @@
                         </svg>
                     </a>-->
                     <a title="Supprimer l'utilisateur" class="bouton-relation deleteUtilisateur">
-                        <input type="hidden" value="{{user.iduser}}" id="valueUser">
+                        <input type="hidden" value="{{user.iduser}}" class="valueUser">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
                         </svg>
@@ -35,9 +35,10 @@
                     </a>
                 </div>
             </div>
-            <input type="hidden" id="token" value="{{ token }}">
+            
         </div>
     {% endfor %}
+    <input type="hidden" id="token" value="{{ token }}">
     </div>
 </div>
 
@@ -45,22 +46,21 @@
 <script>
 
 $(".deleteUtilisateur").click(function() {
-    var userId = $("#valueUser").val();
+    var userId = $(this).children(".valueUser").val();
     var token = $("#token").val();
-    //alert(token);
+    //var tokenParse = JSON.parse(token);
+    //alert(userId);
     console.log(token);
     $.ajax({
         url : 'http://localhost:5000/users/delete/:id',
-        headers: {"jwtToken": token},
+        headers: {Authorization: 'Bearer '+ token},
         type : 'DELETE',
         data: {
         "id": userId,
-        //"jwtToken": token,
         },
-        dataType : 'html',
-        success : function(html){
-            //$("#fetchUsers").load(" #fetchUsers"); 
-            //console.log("utilisateur supprimé");
+        dataType : 'json',
+        success : function(json){
+            console.log(json);
         },
     });
 });

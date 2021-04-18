@@ -3,20 +3,18 @@ require("dotenv").config();
 
 module.exports = (req, res, next) => {
   try {
-    const jwtToken = req.header("jwtToken");
-
+    const jwtToken = req.headers.authorization.split(" ")[1];
     if (!jwtToken) {
-      return res.status(403).json("Non autorisé");
-    }
-    jwt.verify(jwtToken, process.env.JWTSECRET, (err, decodedToken) => {
+      return res.status(403).json("Non autorisÃ©");
+    } else {
+      const decodedToken = jwt.verify(jwtToken, process.env.JWTSECRET);
       req.idUser = decodedToken.idUser;
       req.isAdmin = decodedToken.isAdmin;
       req.isSuperAdmin = decodedToken.isSuperAdmin;
       req.isModerateur = decodedToken.isModerateur;
       next();
-    });
+    }
   } catch (err) {
-    console.log({ err });
-    return res.status(403).json("token invalide");
+    res.status(403).json({ err });
   }
 };
