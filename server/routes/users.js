@@ -312,5 +312,22 @@ router.put("/noSuperAdmin/:id", userAuth, async (req, res) => {
   }
 });
 
+// GET ONE User BY EMAIL
+router.get("/getId/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+
+    const result = await db.query(
+        `SELECT * FROM utilisateur WHERE emailUser = '${email}'`
+    );
+    res.status(200).json({
+      status: "success",
+      utilisateur: result.rows[0],
+    });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 // export the Router
 module.exports = router;
