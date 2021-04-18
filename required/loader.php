@@ -11,6 +11,7 @@ session_start();
 $user = '';
 $user_id = '';
 $user_profile = '';
+$profile = '';
 $isConnected = false;
 
 // Définit quel utilisateur charger sur la page de profil
@@ -20,7 +21,7 @@ if (isset($_GET['id'])) {
     $getuser = ("http://localhost:5000/users/" . $user_id);
     $profile = json_decode(file_get_contents($getuser), true);
 }
-else {
+else if (isset($_SESSION['user'])) {
     $profile = $_SESSION['user'];
 }
 
