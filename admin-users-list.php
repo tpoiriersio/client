@@ -1,11 +1,18 @@
 <?php
-    require __DIR__ . '/required/loader.php';
 
-    // On récupère le tableau de données JSON renvoyé par l'url
+require __DIR__ . '/required/loader.php';
+
+if ($user['utilisateur']['issuperadmin'] == false && $user['utilisateur']['isadmin'] == false)
+{
+    echo("Accès non autorisé");
+    header('Location: home.php');
+}
+else {
+// On récupère le tableau de données JSON renvoyé par l'url
     $getusersroute = "http://localhost:5000/users";
     $userslist = json_decode(file_get_contents($getusersroute), true);
 
-    //var_dump( $_SESSION['jwtToken']);
+//var_dump( $_SESSION['jwtToken']);
 
     echo $twig->render('admin-users-list.tpl', [
         'titre_page' => 'Utilisateurs',
@@ -14,4 +21,7 @@
         'userslist' => $userslist,
         'token' => $_SESSION['jwtToken']
     ]);
-    ?>
+}
+
+
+?>

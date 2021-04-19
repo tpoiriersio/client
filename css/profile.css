@@ -9,6 +9,7 @@
 #profile-header .col-name {
   margin-bottom: auto;
   margin-top: auto;
+  color: white;
 }
 #profile-header .name {
   font-size: 22px;
@@ -32,15 +33,13 @@
   text-decoration: none;
   white-space: nowrap;
   transition: all 0.15s ease-out;
+  color: lightsteelblue;
 }
 #profile-navbar .profile-navlink:hover {
-  background-color: lightblue;
+  background-color: dodgerblue;
+  color: white;
 }
 #profile-navbar .active {
   border-bottom: solid 3px #0dcaf0;
 }
 /*# sourceMappingURL=profile.css.map */
-
-.colorwhite{
-  color: white;
-}

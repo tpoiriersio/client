@@ -18,6 +18,7 @@
                     Explorer
                 </a>
             </li>
+            {% if isConnected == true %}
             <li>
                 <a href="messages.php" class="nav-link text-white">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#chat-quote-fill"/></svg>
@@ -30,6 +31,7 @@
                     Profil
                 </a>
             </li>
+            {% endif %}
         </ul>
         <hr>
         <div class="dropdown">
@@ -41,8 +43,9 @@
                 {% if isConnected == true %}
                 <li><a class="dropdown-item" href="resources-new">Nouvelle ressource</a></li>
                 <li><a class="dropdown-item" href="profile.php">Profil</a></li>
-                <!-- AJOUTER IF EN FONCTION DU GROUPE AFFICHER ADMINISTRATION OU NON -->
+                {% if user.utilisateur.issuperadmin == true or user.utilisateur.isadmin == true or user.utilisateur.ismoderateur == true %}
                 <li><a class="dropdown-item" href="admin.php">Administration</a></li>
+                {% endif %}
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="logout.php">Se déconnecter</a></li>
                 {% else %}

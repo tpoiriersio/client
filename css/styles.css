@@ -8,4 +8,13 @@ body {
 .page-content {
   height: 100%;
 }
+#user_handicap {
+  width: 20px;
+}
+@media (max-width: 768px) {
+  .logo-resrel {
+    margin-top: -50px;
+    margin-bottom: -90px;
+  }
+}
 /*# sourceMappingURL=styles.css.map */

@@ -24,7 +24,7 @@
             <div class="content">
                 <div id="slideshow">
                     <div class="one">
-                        <h2><a href="#"><img src="./assets/media/logo/logo.png" alt=""></a></h2>
+                        {{ include('elements/logo-svg.tpl') }}
                         <p>Rejoignez Ressource Relationnelle dès maintenant</p>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div id="signup-tab-content">
-                            <form class="signup-form" action="http://localhost:5000/users/inscription" method="POST">
+                            <form class="signup-form" method="POST">
                                 <input type="email" class="input" id="user_emailinscription" name="email" autocomplete="off" placeholder="Adresse email">
                                 <input type="text" class="input" id="user_surname" name="nom" autocomplete="off" placeholder="Nom">
                                 <input type="text" class="input" id="user_name" name="prenom" autocomplete="off" placeholder="Prénom">
@@ -58,9 +58,10 @@
                                 <input type="text" class="input" id="user_address" name="adresse" autocomplete="off" placeholder="Adresse">
                                 <input type="text" class="input" id="user_country" name="pays" autocomplete="off" placeholder="Pays">
                                 <input type="text" class="input" id="user_situation" name="situation" autocomplete="off" placeholder="Situation">
-                                <input type="checkbox" class="input" id="user_handicap" name="handicap" autocomplete="off" placeholder="Handicap">
+                                <label>Handicapé</label>
+                                <input type="checkbox" class="input" id="user_handicap" name="handicap" placeholder="Handicap">
 
-                                <input type="submit" class="button" value="S'inscrire">
+                                <input type="button" class="button" value="S'inscrire"  onclick="inscription()">
                             </form>
                         </div>
                     </div>
@@ -105,8 +106,53 @@ function connexion(){
             $jsonstring = JSON.stringify(json);
             window.location.href = './login.php?token=' + $jsonstring + '&email=' + email;
         },
+        error: function (result, status, err) {
+            alert('Erreur : ' + result.responseText);
+        }
     });
 }
+
+function inscription(){
+    var email = $("#user_emailinscription").val();
+    var nom = $("#user_surname").val();
+    var prenom = $("#user_name").val();
+    var mdp = $("#user_passinscription").val();
+    var tel = $("#user_tel").val();
+    var adresse = $("#user_address").val();
+    var pays = $("#user_country").val();
+    var situation = $("#user_situation").val();
+    var handicap = false;
+    if ($("#user_handicap").is(":checked")) {
+        handicap = true;
+    }
+    else {
+        handicap = false;
+    }
+    $.ajax({
+        url : 'http://localhost:5000/users/inscription',
+        type : 'POST',
+        data: {
+            "email": email,
+            "nom": nom,
+            "prenom": prenom,
+            "mdp": mdp,
+            "tel": tel,
+            "adresse": adresse,
+            "pays": pays,
+            "situation": situation,
+            "handicap": handicap,
+        },
+        dataType : 'JSON',
+        success : function(json){
+            $jsonstring = JSON.stringify(json);
+            window.location.href = './login.php?token=' + $jsonstring + '&email=' + email;
+        },
+        error: function (result, status, err) {
+            alert('Erreur : ' + result.responseText);
+        }
+    });
+}
+
 
 /*$(function() {
 	$('.agree,.forgot, #toggle-terms, .log-in, .sign-up').on('click', function(event) {
