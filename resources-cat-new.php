@@ -7,7 +7,7 @@ if ($user['utilisateur']['issuperadmin'] == false && $user['utilisateur']['isadm
     header('Location: home.php');
 }
 else {
-    echo $twig->render('resources-new.tpl', [
+    echo $twig->render('resources-cat-new.tpl', [
         'titre_page' => 'Nouvelle catégorie',
         'isConnected' => $isConnected,
         'user' => $user
