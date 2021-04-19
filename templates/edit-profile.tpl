@@ -59,20 +59,20 @@ $( document ).ready(function() {
     var id = searchParams.get('id');
 
     $.ajax({
-            url : 'http://localhost:5000/users/'+id,
-            type : 'GET',
-            /*data: {
-            "id": id,
-            },*/
-            dataType : 'json',
-            success : function(json){
-                console.log(json);
-                $('#inputNom').val(json.utilisateur.nomuser);
-                $('#inputPrenom').val(json.utilisateur.prenomuser);
-                $('#inputPays').val(json.utilisateur.paysuser);
-                $('#inputEmail').val(json.utilisateur.emailuser);
-            },
-        });
+        url : 'http://localhost:5000/users/'+id,
+        type : 'GET',
+        /*data: {
+        "id": id,
+        },*/
+        dataType : 'json',
+        success : function(json){
+            console.log(json);
+            $('#inputNom').val(json.utilisateur.nomuser);
+            $('#inputPrenom').val(json.utilisateur.prenomuser);
+            $('#inputPays').val(json.utilisateur.paysuser);
+            $('#inputEmail').val(json.utilisateur.emailuser);
+        },
+    });
     
 });
 
