@@ -74,7 +74,7 @@ $( document ).ready(function() {
     
     //alert(tokenParse.jwtToken);
 
-    /*$.ajax({
+    $.ajax({
         url : 'http://localhost:5000/users/'+ id,
         type : 'GET',
         dataType : 'json',
@@ -87,7 +87,7 @@ $( document ).ready(function() {
             $('#inputTel').val(json.utilisateur.teluser);
             $('#inputSituation').val(json.utilisateur.situationuser);
         },
-    });*/
+    });
 
     $("#register").click(function() {
         var email = $("#inputEmail").val();
@@ -98,7 +98,7 @@ $( document ).ready(function() {
         var sitation = $("#inputSituation").val();
         var mdp = $("#inputPassword2").val();
 
-        console.log(id);
+        //console.log(id);
         
         $.ajax({
             data: {
