@@ -83,18 +83,18 @@ router.post("/connexion", validForm, async (req, res) => {
     }
     //si oui, on compare le mot de passe entré avec le mot de passe salé dans la bdd
     bcrypt.compare(mdp, user.rows[0].mdpuser, (err, same) => {
-    if (same) {
-      //si tout est bon on lui génère un token de connexion et on l'envoie côté client
-      const jwtToken = jwtGenerator(
-        user.rows[0].iduser,
-        user.rows[0].isadmin,
-        user.rows[0].issuperadmin,
-        user.rows[0].ismoderateur
-      );
-      return res.json({ jwtToken,  });
-    } else {
-      return res.status(401).json("Informations invalides");
-    }
+      if (same) {
+        //si tout est bon on lui génère un token de connexion et on l'envoie côté client
+        const jwtToken = jwtGenerator(
+          user.rows[0].iduser,
+          user.rows[0].isadmin,
+          user.rows[0].issuperadmin,
+          user.rows[0].ismoderateur
+        );
+        return res.json({ jwtToken });
+      } else {
+        return res.status(401).json("Informations invalides");
+      }
     });
   } catch (err) {
     console.error(err.message);
@@ -136,29 +136,29 @@ router.put("/update/:id", userAuth, async (req, res) => {
     if (req.idUser === req.params.id || req.isAdmin || req.isSuperAdmin) {
       const {
         email,
-        //mdp,
+        mdp,
         nom,
         prenom,
         tel,
         adresse,
         pays,
         situation,
-        //handicap,
+        handicap,
       } = req.body;
       const result = await db.query(
         `UPDATE utilisateur SET
-            emailUser = $1 nomUser = $2, prenomUser = $3, telUser = $4,
-            adresseUser = $5, paysUser = $6, situationUser = $7 WHERE idUser = $8 RETURNING *`,
+            emailUser = $1,mdpUser = $2, nomUser = $3, prenomUser = $4, telUser = $5,
+            adresseUser = $6, paysUser = $7, situationUser = $8, handicapUser = $9 WHERE idUser = $10 RETURNING *`,
         [
           email,
-          //mdp,
+          mdp,
           nom,
           prenom,
           tel,
           adresse,
           pays,
           situation,
-          //handicap,
+          handicap,
           req.params.id,
         ]
       );
@@ -318,7 +318,7 @@ router.get("/getId/:email", async (req, res) => {
     const { email } = req.params;
 
     const result = await db.query(
-        `SELECT * FROM utilisateur WHERE emailUser = '${email}'`
+      `SELECT * FROM utilisateur WHERE emailUser = '${email}'`
     );
     res.status(200).json({
       status: "success",
@@ -329,5 +329,27 @@ router.get("/getId/:email", async (req, res) => {
   }
 });
 
+//GET ALL Favoris
+router.get("/getFav/:id", userAuth, async (res, req) => {
+  try {
+    const result = await db.query(
+      `SELECT idRessource FROM favori WHERE idUser='${req.body.id}'`
+    );
+    const favs = [];
+    result.rows.map(async (fav) => {
+      favs.push(
+        await db.query(
+          `SELECT * from ressource WHERE idRessource='${fav.idressource}'`
+        )
+      );
+    });
+
+    res.status(200).json({
+      favoris: favs,
+    });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
 // export the Router
 module.exports = router;

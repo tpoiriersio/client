@@ -3,12 +3,12 @@
 {{ include('elements/left-sidebar.tpl') }}
 
 <div class="col order-3 order-md-2">
-    <div class="container">
-    {% for key, ressource in reslist.ressources %}
-    {{ include('elements/resources.tpl') }}
+    {{ include('elements/admin-header.tpl') }}
+    {% for cat in catlist.ressourceCategories %}
+    <p>{{ cat.libellecatres }}</p><br>
     {% endfor %}
-    </div>
 </div>
+
 
 {{ include('elements/right-sidebar.tpl') }}
 

@@ -5,7 +5,7 @@
 <div class="col order-3 order-md-2">
 
     <div class="container rounded bg-white mt-5 mb-5 centerprofil">
-        <form id="new-resource" action="http://localhost:5000/ressources/create" method="POST">
+        <form id="new-resource">
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="inputTitre" class="form-label">Titre</label>
@@ -35,10 +35,8 @@
                     <label for="selectTypRes" class="form-label">Type</label>
                     <select name="TypRes" class="form-control" id="selectTypRes">
                         <option value="">Choisissez un type</option>
-                        <!-- TODO: For each type -->
-                        <option value="photo">Photo</option>
-                        <option value="video">Vidéo</option>
-                        <option value="texte">Texte</option>
+                        <option value="1">Image</option>
+                        <option value="2">Vidéo</option>
                     </select>
                 </div>
             </div>
@@ -47,13 +45,14 @@
                     <label for="selectCatRes" class="form-label">Catégorie</label>
                     <select name="CatRes" class="form-control" id="selectCatRes">
                         <option value="">Choisissez une catégorie</option>
-                        <!-- TODO: For each catégorie -->
-                        <option value="test">test</option>
+                        {% for cat in catlist.ressourceCategories %}
+                        <option value="{{ cat.idcatres }}">{{ cat.libellecatres }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary" style="margin: 30px; left: 0;">Enregistrer</button>
+            <input type="hidden" id="token" value="{{ token }}">
+            <button type="button" class="btn btn-primary" id="register">Enregistrer</button>
         </form>
     </div>
 
@@ -63,3 +62,44 @@
 
 {{ include('elements/footer.tpl') }}
 
+<script>
+
+    $( document ).ready(function() {
+
+        $("#register").click(function() {
+            var titre = $("#inputTitre").val();
+            var illustration = $("#inputIllustration").val();
+            var message = $("#inputMessage").val();
+            var duree = $("#inputDuree").val();
+            var TypRes = $("#selectTypRes").val();
+            var CatRes = $("#selectCatRes").val();
+            var token = $("#token").val();
+            var tokenParse = JSON.parse(token);
+
+            $.ajax({
+                type : 'POST',
+                url : 'http://localhost:5000/res/create',
+
+                data: {
+                    "titre": titre,
+                    "illustration": illustration,
+                    "message": message,
+                    "duree": duree,
+                    "TypRes": TypRes,
+                    "CatRes": CatRes,
+                },
+                dataType : 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", 'Bearer '+ tokenParse.jwtToken);
+                },
+                success : function(json){
+                    alert('La ressource a été créée avec succès.');
+                },
+                error: function (result, status, err) {
+                    alert('Erreur : ' + result.responseText);
+                }
+            });
+        });
+    });
+
+</script>

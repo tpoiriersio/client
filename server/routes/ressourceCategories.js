@@ -38,7 +38,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST a Ressource Category
-router.post("/create", userAuth, async (req, res) => {
+router.post("/", userAuth, async (req, res) => {
   try {
     if (req.isAdmin || req.isSuperAdmin) {
       const result = await db.query(

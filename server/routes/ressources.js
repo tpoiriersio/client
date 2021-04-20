@@ -10,7 +10,7 @@ const router = express.Router();
 const userAuth = require("../middlewares/userAuth");
 
 //GET ALL VERIFIED Ressources
-router.get("/isVerified", async (req, res) => {
+router.get("/Verified", async (req, res) => {
   try {
     const result = await db.query(
       "SELECT * FROM ressource WHERE isVerified=true"
@@ -25,7 +25,7 @@ router.get("/isVerified", async (req, res) => {
 });
 
 //GET ALL NON VERIFIED Ressources
-router.get("/isNotVerified", userAuth, async (req, res) => {
+router.get("/NotVerified", userAuth, async (req, res) => {
   try {
     if (req.isAdmin || req.isSuperAdmin || req.isModerateur) {
       const result = await db.query(
@@ -43,21 +43,31 @@ router.get("/isNotVerified", userAuth, async (req, res) => {
   }
 });
 
+router.post("/isVerified/:id", userAuth, async (req, res) => {
+  try {
+    if (req.isAdmin || req.isSuperAdmin || req.isModerateur) {
+      const result = await db.query(
+        `UPDATE ressource SET isVerified=true WHERE idRessource=${req.body.id} RETURNING *`
+      );
+      res.status(200).json({
+        status: "success",
+        ressources: result.rows,
+      });
+    } else {
+      res.status(401).json({ message: "Non Autorisé" });
+    }
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 // POST Ressource
 router.post("/create", userAuth, async (req, res) => {
   const { titre, illustration, message, duree, TypRes, CatRes } = req.body;
   try {
-    const idTypRes = await db.query(
-      `SELECT idTypRes FROM type_ressource WHERE libelleTypRes=$1`,
-      [TypRes]
-    );
-    const idCatRes = await db.query(
-      `SELECT idCatRes FROM categorie_ressource WHERE idCatRes=$1`,
-      [CatRes]
-    );
     const result = await db.query(
-      `INSERT INTO ressource (titreRessource, illustrationRessource, messageRessource, dureeRessource, idAuteur, idTypRes, idCatRes ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-      [titre, illustration, message, duree, req.idUser, idTypRes, idCatRes]
+      `INSERT INTO ressource (titreRessource, illustrationRessource, messageRessource, dureeRessource, idAuteur, idTypRes, idCatRes, isVerified ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+      [titre, illustration, message, duree, req.idUser, TypRes, CatRes, true]
     );
 
     res.status(200).json({
@@ -133,6 +143,74 @@ router.delete("/delete/:id", userAuth, async (req, res) => {
     } else {
       res.status(401).json({ message: "Non Autorisé" });
     }
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
+//POST Commentaire
+router.post("/comm", userAuth, async (req, res) => {
+  try {
+    const { contenu, idUser } = req.body;
+
+    const commentaire = await db.query(
+      "INSERT INTO commentaire (contenuCommentaire, idUser) VALUES ($1, $2) RETURNING *",
+      [contenu, idUser]
+    );
+
+    const ajoutCommRess = await db.query(
+      `INSERT INTO ressource (commentaires) VALUES (${commentaire.rows[0].idcommentaire}) RETURNING *`
+    );
+
+    res.status(200).json({
+      commentaire: commentaire.rows[0],
+      ressource: ajoutCommRess.rows[0],
+    });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
+// ROUTES Favoris
+
+//POST favori
+router.post("/fav/:id", userAuth, async (req, res) => {
+  try {
+    const result = await db.query(
+      `INSERT INTO favori (idRessource,idUser) VALUES ($1,$2) RETURNING *`,
+      [req.idUser, req.body.id]
+    );
+    res.status(201).json({
+      status: "success",
+      favori: result,
+    });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
+//COUNT favori
+router.get("fav/:id", userAuth, async (req, res) => {
+  try {
+    const result = await db.query(
+      `COUNT * FROM favori WHERE idRessource='${req.body.id}'`
+    );
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
+//DELETE favori
+router.delete("fav/:id", userAuth, async (req, res) => {
+  try {
+    const result = await db.query(
+      `DELETE FROM Favori WHERE idUser=$1 AND idRessource=$2`,
+      [req.idUser, req.body.id]
+    );
+    res.status(204).json({
+      status: "success",
+      message: "Favori Supprimé",
+    });
   } catch (err) {
     res.status(500).json({ err });
   }

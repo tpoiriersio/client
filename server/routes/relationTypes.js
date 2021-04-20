@@ -6,6 +6,9 @@ const db = require("../db");
 // create a Router
 const router = express.Router();
 
+//import des middlewares d'authorisation
+const userAuth = require("../middlewares/userAuth");
+
 // GET ALL Relations Types
 router.get("/", async (req, res) => {
   try {

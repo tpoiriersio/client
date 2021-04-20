@@ -21,17 +21,16 @@ CREATE TABLE categorie_ressource (
 );
 
 CREATE TABLE ressource (
-    idRessource uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
+    idRessource uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     titreRessource varchar(255) NOT NULL,
     illustrationRessource varchar(255),
     messageRessource text NOT NULL,
     dureeRessource int NOT NULL,
-    nbFavRessource int DEFAULT 0,
     commentaires uuid [],
     isVerified boolean,
-    idAuteur uuid REFERENCES utilisateur (idUser),
-    idTypRes int REFERENCES  type_ressource (idTypRes),
-    idCatRes int REFERENCES categorie_ressource (idCatRes)
+    idAuteur uuid REFERENCES utilisateur (idUser) ON DELETE CASCADE,
+    idTypRes int REFERENCES  type_ressource(idTypRes)  ON DELETE CASCADE ,
+    idCatRes int REFERENCES categorie_ressource (idCatRes)  ON DELETE CASCADE 
 );
 
 /* Tables utilisateur, admin, superardmin, et moderateur  ------------------------------------- */
@@ -62,21 +61,21 @@ CREATE TABLE type_relation (
 
 CREATE TABLE relation (
   idRelation uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  idUser1 uuid REFERENCES utilisateur (idUser) NOT NULL,
-  idUser2 uuid REFERENCES utilisateur (idUser) NOT NULL,
-  idTypRel INT REFERENCES type_relation (idTypRel) NOT NULL
+  idUser1 uuid REFERENCES utilisateur (idUser) NOT NULL  ON DELETE CASCADE ,
+  idUser2 uuid REFERENCES utilisateur (idUser) NOT NULL  ON DELETE CASCADE ,
+  idTypRel INT REFERENCES type_relation (idTypRel) NOT NULL  ON DELETE CASCADE 
 );
 
 CREATE TABLE ressource_en_cours (
-  idRessource uuid REFERENCES ressource (idRessource) ,
-  idRelation uuid REFERENCES relation (idRelation) ,
-  idLeader uuid REFERENCES utilisateur (idUser),
+  idRessourceEnCours uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  idRessource uuid REFERENCES ressource (idRessource)  ON DELETE CASCADE ,
+  idRelation uuid REFERENCES relation (idRelation)  ON DELETE CASCADE ,
+  idLeader uuid REFERENCES utilisateur (idUser)  ON DELETE CASCADE ,
   idParticipants uuid [],
   dateDebutParticipation DATE DEFAULT CURRENT_DATE,
   dateFinParticipation DATE,
   isExploite boolean,
   commentaires uuid [],
-  PRIMARY KEY (idRessource, idRelation, idLeader)
 );
 
 /* Tables commentaire et favori ---------------------------------------------------------------- */
@@ -85,13 +84,13 @@ CREATE TABLE commentaire (
     idCommentaire uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     contenuCommentaire text NOT NULL,
     dateCommentaire date DEFAULT CURRENT_TIMESTAMP,
-    idUser uuid REFERENCES utilisateur (idUser) NOT NULL,
-    idRessource uuid REFERENCES ressource (idRessource) NOT NULL
+    idUser uuid REFERENCES utilisateur (idUser) NOT NULL  ON DELETE CASCADE ,
+    idRessource uuid REFERENCES ressource (idRessource) NOT NULL  ON DELETE CASCADE 
 );
 
 CREATE TABLE favori (
-  idRessource uuid REFERENCES ressource (idRessource),
-  idUser uuid REFERENCES utilisateur (idUser),
+  idRessource uuid REFERENCES ressource (idRessource)  ON DELETE CASCADE ,
+  idUser uuid REFERENCES utilisateur (idUser)  ON DELETE CASCADE ,
   PRIMARY KEY ( idRessource, idUser )
 );
 
