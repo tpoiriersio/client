@@ -46,6 +46,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="token" value="{{ token }}">
 
 <!--{% if ressourceList.ressource.isNotVerified == true %}
     <div class="container">
@@ -92,6 +93,9 @@
 <script>
 $( document ).ready(function() {
 
+    var token = $("#token").val();
+    var tokenParse = JSON.parse(token);
+
     //on parcourt pour chaque élément ayant la classe id auteur, on récupére son ID puis on fait une recherche de l'utilisateur qui l'a crée
     var collection = $(".idauteur");
     collection.each(function() {
@@ -106,7 +110,22 @@ $( document ).ready(function() {
         });
     });
 
-   
+    $.ajax({
+        url : 'http://localhost:5000/res/NotVerified',
+        type : 'GET',
+        dataType : 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", 'Bearer '+ tokenParse.jwtToken);
+        },
+        success : function(json){
+            var data = json;
+            console.log(data);
+            $.each(data, function(i, obj) {
+                //console.log(i + " " + obj );
+                console.log(Object.keys(obj));
+            });
+            
+        },
+    });
 });
-
 </script>

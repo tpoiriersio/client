@@ -67,7 +67,7 @@ router.post("/create", userAuth, async (req, res) => {
   try {
     const result = await db.query(
       `INSERT INTO ressource (titreRessource, illustrationRessource, messageRessource, dureeRessource, idAuteur, idTypRes, idCatRes, isVerified ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      [titre, illustration, message, duree, req.idUser, TypRes, CatRes, true]
+      [titre, illustration, message, duree, req.idUser, TypRes, CatRes, false]
     );
 
     res.status(200).json({
