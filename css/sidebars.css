@@ -7,20 +7,15 @@
   right: 0;
 }
 */
+@media (max-width: 768px) {
+  .sticky-top {
+    position: revert;
+  }
+}
 .left-sidebar,
 .right-sidebar {
   padding: 0;
 }
-
-/*.right-sidebar {
-  border-left: 1px solid white;
-}
-
-.left-sidebar{
-  border-right: 1px solid white;
-}*/
-
-
 .sidebar-column {
   margin-left: auto;
   margin-right: auto;
@@ -43,6 +38,9 @@
 }
 .dropdown-toggle {
   outline: 0;
+}
+.dropdown-menu-dark {
+  z-index: 9999;
 }
 .nav-flush .nav-link {
   border-radius: 0;

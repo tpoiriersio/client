@@ -8,8 +8,19 @@
 }
 */
 
+.sticky-top {
+  @media (max-width: 768px) {
+    position: revert;
+  }
+}
+
 .left-sidebar, .right-sidebar {
   padding: 0;
+}
+
+.right-sidebar {
+  @media (max-width: 768px) {
+  }
 }
 
 .sidebar-column {
@@ -49,6 +60,10 @@ body > * {
 }
 
 .dropdown-toggle { outline: 0; }
+
+.dropdown-menu-dark {
+  z-index: 9999;
+}
 
 .nav-flush .nav-link {
   border-radius: 0;
@@ -102,5 +117,3 @@ body > * {
 
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
-
-

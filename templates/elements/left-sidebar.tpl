@@ -1,38 +1,46 @@
 
-<div class="col-md-2 order-1 left-sidebar bg-dark">
+<div class="col-md-2 order-1 left-sidebar bg-dark ">
     <div class="d-flex flex-column p-3 text-white sticky-top">
         <a href="home.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             {{ include('elements/logo-svg.tpl') }}
         </a>
         <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a href="home.php" class="nav-link active">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-                    Accueil
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-                    Explorer
-                </a>
-            </li>
-            {% if isConnected == true %}
-            <li>
-                <a href="messages.php" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#chat-quote-fill"/></svg>
-                    Messages
-                </a>
-            </li>
-            <li>
-                <a href="profile.php" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-                    Profil
-                </a>
-            </li>
-            {% endif %}
-        </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand d-lg-none toggler">Menu</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="nav nav-pills navbar-nav nav-fill flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="home.php" class="nav-link text-white {% if titre_page == 'Home'%} active {% endif %}">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+                            Explorer
+                        </a>
+                    </li>
+                    {% if isConnected == true %}
+                    <li class="nav-item">
+                        <a href="messages.php" class="nav-link text-white {% if titre_page == 'Messages'%} active {% endif %}">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#chat-quote-fill"/></svg>
+                            Messages
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.php" class="nav-link text-white {% if titre_page == 'Profil'%} active {% endif %}">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+                            Profil
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
         <hr>
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
