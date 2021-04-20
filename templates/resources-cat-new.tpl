@@ -5,15 +5,15 @@
 <div class="col order-3 order-md-2">
 
     <div class="container rounded bg-white mt-5 mb-5 centerprofil">
-        <form id="new-resource" action="http://localhost:5000/ressourceCategories/create" method="POST">
+        <form id="new-resource">
             <div class="row mt-3">
                 <div class="col-12">
-                    <label for="inputTitre" class="form-label">Titre</label>
-                    <input type="text" name="name" class="form-control" id="inputCatName">
+                    <label for="inputCatName" class="form-label">Libellé</label>
+                    <input type="text" name="libelleCatRes" class="form-control" id="inputCatName">
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary" style="margin: 30px; left: 0;">Enregistrer</button>
+            <input type="hidden" id="token" value="{{ token }}">
+            <button type="button" class="btn btn-primary" id="register">Enregistrer</button>
         </form>
     </div>
 
@@ -23,3 +23,33 @@
 
 {{ include('elements/footer.tpl') }}
 
+<script>
+
+    $( document ).ready(function() {
+
+        $("#register").click(function() {
+            var libelleCatRes = $("#inputCatName").val();
+            var token = $("#token").val();
+            var tokenParse = JSON.parse(token);
+
+            $.ajax({
+                type : 'POST',
+                url : 'http://localhost:5000/rescat',
+                data: {
+                    "name": libelleCatRes
+                },
+                dataType : 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", 'Bearer '+ tokenParse.jwtToken);
+                },
+                success : function(json){
+                    alert('La catégorie a été créée avec succès.');
+                },
+                error: function (result, status, err) {
+                    alert('Erreur : ' + result.responseText);
+                }
+            });
+        });
+    });
+
+</script>
