@@ -20,4 +20,8 @@ body {
 p {
   color: white;
 }
+
+.card-text{
+  color: black !important;
+}
 /*# sourceMappingURL=styles.css.map */
