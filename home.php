@@ -9,6 +9,7 @@
         'titre_page' => 'Home',
         'isConnected' => $isConnected,
         'user' => $user,
-        'reslist' => $resourcesList
+        'reslist' => $resourcesList,
+        'token' => $_SESSION['jwtToken']
     ]);
     ?>

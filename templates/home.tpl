@@ -4,7 +4,8 @@
 
 <div class="col order-3 order-md-2">
     <div class="container">
-    {% for key, ressource in reslist.ressources %}
+        <input type="hidden" id="token" value="{{ token }}">
+        {% for key, ressource in reslist.ressources %}
     {{ include('elements/resources.tpl') }}
     {% endfor %}
     </div>
@@ -13,4 +14,5 @@
 {{ include('elements/right-sidebar.tpl') }}
 
 {{ include('elements/footer.tpl') }}
+
 

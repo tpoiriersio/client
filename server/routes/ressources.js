@@ -47,7 +47,7 @@ router.post("/isVerified/:id", userAuth, async (req, res) => {
   try {
     if (req.isAdmin || req.isSuperAdmin || req.isModerateur) {
       const result = await db.query(
-        `UPDATE ressource SET isVerified=true WHERE idRessource=${req.body.id} RETURNING *`
+        `UPDATE ressource SET isVerified='true' WHERE idRessource='${req.body.id}' RETURNING *`
       );
       res.status(200).json({
         status: "success",
