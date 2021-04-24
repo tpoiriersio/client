@@ -1,2 +1,8 @@
 node_modules
 .env
+server/.env
+.idea/vcs.xml
+.idea/php.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/client.iml

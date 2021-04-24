@@ -94,6 +94,7 @@
                 },
                 success : function(json){
                     alert('La ressource a été créée avec succès.');
+                    location.reload();
                 },
                 error: function (result, status, err) {
                     alert('Erreur : ' + result.responseText);

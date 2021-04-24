@@ -5,7 +5,12 @@
 <div class="col order-3 order-md-2">
     {{ include('elements/profile-header.tpl') }}
 
-    {{ include('elements/resources-profil.tpl') }}
+    {% for key, ressource in reslist.ressources %}
+    {% if ressource.idauteur == profile.utilisateur.iduser %}
+
+    {{ include('elements/resources.tpl') }}
+    {% endif %}
+    {% endfor %}
 </div>
 
 

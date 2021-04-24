@@ -4,6 +4,8 @@
 
 <div class="col order-3 order-md-2">
 
+    {{ include('elements/admin-header.tpl') }}
+
     <div class="container rounded bg-white mt-5 mb-5 centerprofil">
         <form id="new-resource">
             <div class="row mt-3">
@@ -44,6 +46,7 @@
                 },
                 success : function(json){
                     alert('La catégorie a été créée avec succès.');
+                    location.href='resources-cat-list.php';
                 },
                 error: function (result, status, err) {
                     alert('Erreur : ' + result.responseText);

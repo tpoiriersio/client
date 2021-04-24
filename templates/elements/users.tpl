@@ -38,7 +38,6 @@
             
         </div>
     {% endfor %}
-    <input type="hidden" id="token" value="{{ token }}">
     </div>
 </div>
 
