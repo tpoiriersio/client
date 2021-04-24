@@ -126,7 +126,12 @@ router.put("/update", userAuth, async (req, res) => {
 
 //DELETE Ressource
 router.delete("/delete/:id", userAuth, async (req, res) => {
+  const { id } = req.body;
   try {
+    const ressource = await db.query(
+        `SELECT * from ressource where idRessource=$1`,
+        [id]
+    );
     if (
       req.idUser === ressource.rows[0].idauteur ||
       req.isAdmin ||

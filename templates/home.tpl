@@ -14,4 +14,5 @@
 
 {{ include('elements/footer.tpl') }}
 
+<script src="js/res-delete.js"></script>
 
