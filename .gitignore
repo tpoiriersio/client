@@ -6,3 +6,4 @@ server/.env
 .idea/modules.xml
 .idea/misc.xml
 .idea/client.iml
+.idea/watcherTasks.xml

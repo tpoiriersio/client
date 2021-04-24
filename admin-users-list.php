@@ -12,8 +12,6 @@ else {
     $getusersroute = "http://localhost:5000/users";
     $userslist = json_decode(file_get_contents($getusersroute), true);
 
-//var_dump( $_SESSION['jwtToken']);
-
     echo $twig->render('admin-users-list.tpl', [
         'titre_page' => 'Utilisateurs',
         'isConnected' => $isConnected,

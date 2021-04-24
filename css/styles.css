@@ -17,11 +17,10 @@ body {
     margin-bottom: -90px;
   }
 }
-p {
+#profile-header p {
   color: white;
 }
-
-.card-text{
-  color: black !important;
+a {
+  cursor: pointer;
 }
 /*# sourceMappingURL=styles.css.map */
