@@ -4,9 +4,12 @@
 
 <div class="col order-3 order-md-2">
     {{ include('elements/admin-header.tpl') }}
+    <br/>
+    <ol class="list-group list-group-numbered">
     {% for cat in catlist.ressourceCategories %}
-    <p>{{ cat.libellecatres }}</p><br>
+    <li class="list-group-item">{{ cat.libellecatres }}</li>
     {% endfor %}
+    </ol>
 </div>
 
 
