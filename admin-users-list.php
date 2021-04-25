@@ -13,7 +13,7 @@ else {
     $userslist = json_decode(file_get_contents($getusersroute), true);
 
     echo $twig->render('admin-users-list.tpl', [
-        'titre_page' => 'Utilisateurs',
+        'titre_page' => 'Administration des utilisateurs',
         'isConnected' => $isConnected,
         'user' => $user,
         'userslist' => $userslist,

@@ -54,8 +54,6 @@
         $( document ).ready(function() {
 
             // -- Affichage du nom et prénom de l'auteur de la ressource --
-            var token = $("#token").val();
-            var tokenParse = JSON.parse(token);
             //on parcourt pour chaque élément ayant la classe id auteur, on récupére son ID puis on fait une recherche de l'utilisateur qui l'a crée
             var collection = $(".idauteur");
             collection.each(function () {

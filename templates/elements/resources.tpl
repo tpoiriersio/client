@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container resource-card">
         <div class="card placementPublication">
             <h5 class="card-header">
                 <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
@@ -11,7 +11,7 @@
             </h5>
             <div class="card-body">
                 <a href="resource-details.php?id={{ ressource.idressource }}">
-                    <h5 class="card-title">{{ ressource.titreressource }}</h5>
+                    <h5 class="card-title res-title">{{ ressource.titreressource }}</h5>
                 </a>
                 <div class="type-res-{{ ressource.idtypres }}"></div>
                 <div class="mb-3 cat-res-{{ ressource.idcatres }}"></div>
@@ -44,8 +44,6 @@
 $( document ).ready(function() {
 
     // -- Affichage du nom et prénom de l'auteur de la ressource --
-    var token = $("#token").val();
-    var tokenParse = JSON.parse(token);
     //on parcourt pour chaque élément ayant la classe id auteur, on récupére son ID puis on fait une recherche de l'utilisateur qui l'a crée
     var collection = $(".idauteur");
     collection.each(function () {

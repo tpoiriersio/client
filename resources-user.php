@@ -11,13 +11,24 @@ else {
     $getResourcesIsVerified = "http://localhost:5000/res/Verified";
     $resourcesList = json_decode(file_get_contents($getResourcesIsVerified), true);
 
-    echo $twig->render('resources-user.tpl', [
-        'titre_page' => 'Ressources publiées',
-        'isConnected' => $isConnected,
-        'user' => $user,
-        'profile' => $profile,
-        'reslist' => $resourcesList,
-        'token' => $_SESSION['jwtToken']
-    ]);
+    if (isset ($_SESSION['jwtToken'])) {
+        echo $twig->render('resources-user.tpl', [
+            'titre_page' => 'Ressources publiées',
+            'isConnected' => $isConnected,
+            'user' => $user,
+            'profile' => $profile,
+            'reslist' => $resourcesList,
+            'token' => $_SESSION['jwtToken']
+        ]);
+    }
+    else {
+        echo $twig->render('resources-user.tpl', [
+            'titre_page' => 'Ressources publiées',
+            'isConnected' => $isConnected,
+            'user' => $user,
+            'profile' => $profile,
+            'reslist' => $resourcesList,
+        ]);
+    }
 }
-    ?>
+?>

@@ -7,6 +7,10 @@ if ($isConnected == false && $profile == '') {
     header('Location: home.php');
 }
 else {
+    // TODO : récupérer les relations de l'utilisateur
+    $getusersroute = "http://localhost:5000/users";
+    $userslist = json_decode(file_get_contents($getusersroute), true);
+
     echo $twig->render('relations.tpl', [
         'titre_page' => 'Relations',
         'isConnected' => $isConnected,
