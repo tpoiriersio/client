@@ -23,10 +23,12 @@
             </div>
             <div class="content">
                 <div id="slideshow">
-                    <div class="one">
-                        {{ include('elements/logo-svg.tpl') }}
-                        <p>Rejoignez Ressource Relationnelle dès maintenant</p>
-                    </div>
+                    <a href="home.php">
+                        <div class="one">
+                            {{ include('elements/logo-svg.tpl') }}
+                            <p>Rejoignez Ressource Relationnelle dès maintenant</p>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="user">
