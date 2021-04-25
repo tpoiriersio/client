@@ -176,6 +176,21 @@ router.post("/comm", userAuth, async (req, res) => {
   }
 });
 
+// GET ONE Ressource BY ID
+router.get("/:id", async (req, res) => {
+  try {
+    const result = await db.query(
+        `SELECT * FROM ressource WHERE idRessource = '${req.params.id}'`
+    );
+    res.status(200).json({
+      status: "success",
+      ressource: result.rows[0],
+    });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 // ROUTES Favoris
 
 //POST favori

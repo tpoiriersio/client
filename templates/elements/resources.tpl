@@ -5,11 +5,17 @@
                 <input type="hidden" class="idressource" value="{{ ressource.idressource }}">
                 <!-- ici on récupére l'id de l'auteur dans une variale hidden pour une requête ajax ensuite -->
                 <input type="hidden" class="idauteur" value="{{ ressource.idauteur }}">
+                <input type="hidden" class="idtype" value="{{ ressource.idtypres }}">
+                <input type="hidden" class="idcat" value="{{ ressource.idcatres }}">
                 <strong class="nomAuteur-{{ ressource.idauteur }}">AUTEUR</strong>
             </h5>
             <div class="card-body">
-                <h5 class="card-title">{{ ressource.titreressource }}</h5>
-                <p class="card-text">{{ ressource.messageressource }}</p>
+                <a href="resource-details.php?id={{ ressource.idressource }}">
+                    <h5 class="card-title">{{ ressource.titreressource }}</h5>
+                </a>
+                <div class="type-res-{{ ressource.idtypres }}"></div>
+                <div class="mb-3 cat-res-{{ ressource.idcatres }}"></div>
+                <!--<p class="card-text">{{ ressource.messageressource }}</p>-->
                 <!-- Afficher ces actions si la ressource est validée / visible publiquement -->
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#like"/></svg>
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#comment"/></svg>
@@ -50,6 +56,34 @@ $( document ).ready(function() {
             dataType: 'json',
             success: function (json) {
                 $('.nomAuteur-'+id).html(json.utilisateur.nomuser + ' ' + json.utilisateur.prenomuser);
+            }
+        });
+    });
+
+    // -- Affichage du type --
+    var typecollection = $(".idtype");
+    typecollection.each(function () {
+        var id = $(this).val();
+        $.ajax({
+            url: 'http://localhost:5000/rescat/type/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function (json) {
+                $('.type-res-'+id).html(json.ressourceType.libelletypres);
+            }
+        });
+    });
+
+    // -- Affichage de la catégorie --
+    var catcollection = $(".idcat");
+    catcollection.each(function () {
+        var id = $(this).val();
+        $.ajax({
+            url: 'http://localhost:5000/rescat/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function (json) {
+                $('.cat-res-'+id).html(json.ressourceCategory.libellecatres);
             }
         });
     });

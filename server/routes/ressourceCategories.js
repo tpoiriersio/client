@@ -99,4 +99,19 @@ router.delete("/delete/:id", userAuth, async (req, res) => {
   }
 });
 
+// GET ONE Ressource Type BY ID
+router.get("/type/:id", async (req, res) => {
+  try {
+    const result = await db.query(
+        `SELECT * FROM type_ressource WHERE idTypRes = '${req.params.id}'`
+    );
+    res.status(200).json({
+      status: "success",
+      ressourceType: result.rows[0],
+    });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 module.exports = router;
