@@ -138,7 +138,7 @@ router.post("/create", userAuth, async (req, res) => {
   try {
     if (req.idUser) {
       const result = await db.query(
-          `INSERT INTO relation (idUser1,idUser2, idTypRel) idUser1 = $1, idUser2 = $2, idTypRel = (SELECT idTypRel FROM type_relation WHERE libelleTypRel = $3) RETURNING *`,
+          `INSERT INTO relation (idUser1, idUser2, idTypRel) VALUES ($1, $2, $3) RETURNING *`,
           [req.idUser, req.body.idUser2, req.body.idTypRel]
       );
       res.status(200).json({
