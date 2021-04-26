@@ -133,6 +133,26 @@ router.get("/Collegue/:id", async (req, res) => {
   }
 });
 
+//POST Relation from USER
+router.post("/create", userAuth, async (req, res) => {
+  try {
+    if (req.idUser) {
+      const result = await db.query(
+          `INSERT INTO relation (idUser1,idUser2, idTypRel) idUser1 = $1, idUser2 = $2, idTypRel = (SELECT idTypRel FROM type_relation WHERE libelleTypRel = $3) RETURNING *`,
+          [req.idUser, req.body.idUser2, req.body.idTypRel]
+      );
+      res.status(200).json({
+        status: "success",
+        result: result.rows[0],
+      });
+    } else {
+      res.status(401).json({ message: "Non Autorisé" });
+    }
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 //DELETE Relation from USER
 router.delete("/delete/:id1/:id2", userAuth, async (req, res) => {
   try {

@@ -9,6 +9,7 @@ const usersRoutes = require("./routes/users");
 const relationsRoutes = require("./routes/relations");
 const relationTypesRoutes = require("./routes/relationTypes");
 const ressourceCategoriesRoutes = require("./routes/ressourceCategories");
+const ressourceTypesRoutes = require("./routes/ressourceTypes");
 const ressourcesRoutes = require("./routes/ressources");
 const participationRoutes = require("./routes/participation");
 
@@ -23,6 +24,7 @@ app.use("/users", usersRoutes);
 app.use("/reltyp", relationTypesRoutes);
 app.use("/rel", relationsRoutes);
 app.use("/rescat", ressourceCategoriesRoutes);
+app.use("/restyp", ressourceTypesRoutes);
 app.use("/res", ressourcesRoutes);
 app.use("/participation", participationRoutes);
 

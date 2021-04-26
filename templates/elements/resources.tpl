@@ -63,7 +63,7 @@ $( document ).ready(function() {
     typecollection.each(function () {
         var id = $(this).val();
         $.ajax({
-            url: 'http://localhost:5000/rescat/type/' + id,
+            url: 'http://localhost:5000/restyp/' + id,
             type: 'GET',
             dataType: 'json',
             success: function (json) {
