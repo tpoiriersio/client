@@ -28,7 +28,9 @@
                 <!-- Afficher ces actions si la ressource est validée / visible publiquement -->
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#like"/></svg>
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#comment"/></svg>
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#share"/></svg>
+                <a title="Inviter à participer" class="btn-invite">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#share"/></svg>
+                </a>
                 {% endif %}
                 {% if ressource.ressource.idauteur == user.utilisateur.iduser
                 or user.utilisateur.issuperadmin
