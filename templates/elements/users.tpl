@@ -118,7 +118,7 @@ $(".deleteUtilisateur").click(function() {
     var token = $("#token").val();
     var tokenParse = JSON.parse(token);
     //alert(userId);
-    console.log(tokenParse.jwtToken);
+    //console.log(tokenParse.jwtToken);
     $.ajax({
         url : 'http://localhost:5000/users/delete/'+ userId,
         headers: {

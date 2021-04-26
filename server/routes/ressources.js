@@ -153,18 +153,18 @@ router.delete("/delete/:id", userAuth, async (req, res) => {
   }
 });
 
-//POST Commentaire
-router.post("/comm", userAuth, async (req, res) => {
+router.post("/comm/:id", userAuth, async (req, res) => {
   try {
     const { contenu, idUser } = req.body;
 
     const commentaire = await db.query(
-      "INSERT INTO commentaire (contenuCommentaire, idUser) VALUES ($1, $2) RETURNING *",
-      [contenu, idUser]
+      "INSERT INTO commentaire (contenuCommentaire, idUser, idRessource) VALUES ($1, $2, $3) RETURNING *",
+      [contenu, idUser, req.params.id]
     );
 
     const ajoutCommRess = await db.query(
-      `INSERT INTO ressource (commentaires) VALUES (${commentaire.rows[0].idcommentaire}) RETURNING *`
+      `INSERT INTO ressource (commentaires) VALUES ($1) WHERE idRessource=$2 RETURNING *`,
+      [commentaire.rows[0].idcommentaire, req.params.id]
     );
 
     res.status(200).json({

@@ -50,56 +50,118 @@
         </div>
     </div>
 
-    <script>
-        $( document ).ready(function() {
-
-            // -- Affichage du nom et prénom de l'auteur de la ressource --
-            //on parcourt pour chaque élément ayant la classe id auteur, on récupére son ID puis on fait une recherche de l'utilisateur qui l'a crée
-            var collection = $(".idauteur");
-            collection.each(function () {
-                var id = $(this).val();
-                $.ajax({
-                    url: 'http://localhost:5000/users/' + id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (json) {
-                        $('.nomAuteur-'+id).html(json.utilisateur.nomuser + ' ' + json.utilisateur.prenomuser);
-                    }
-                });
-            });
-
-            // -- Affichage du type --
-            var typecollection = $(".idtype");
-            typecollection.each(function () {
-                var id = $(this).val();
-                $.ajax({
-                    url: 'http://localhost:5000/rescat/type/' + id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (json) {
-                        $('.type-res-'+id).html(json.ressourceType.libelletypres);
-                    }
-                });
-            });
-
-            // -- Affichage de la catégorie --
-            var catcollection = $(".idcat");
-            catcollection.each(function () {
-                var id = $(this).val();
-                $.ajax({
-                    url: 'http://localhost:5000/rescat/' + id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (json) {
-                        $('.cat-res-'+id).html(json.ressourceCategory.libellecatres);
-                    }
-                });
-            });
-
-        });
-    </script>
-
+    <div class="container d-flex justify-content-center mt-100 mb-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Commentaires récents</h4>
+                    </div>
+                    <div class="comment-widgets m-b-20">
+                        <div class="d-flex flex-row comment-row ">
+                            <div class="p-2"><span class="round"><img src="https://i.imgur.com/tT8rjKC.jpg" alt="user" width="50"></span></div>
+                            <div class="comment-text active w-100">
+                                <h5>Jonty Andrews</h5>
+                                <div class="comment-footer"> <span class="date">March 13, 2020</span> <span class="label label-success">Approved</span> <span class="action-icons active"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right text-success"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart text-danger"></i></a> </span> </div>
+                                <p class="m-b-5 m-t-10">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-light p-2">
+        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+            <textarea class="form-control ml-1 shadow-none textarea" id="valueCommentaire"></textarea>
+        </div>
+        <div class="mt-2 text-right">
+            <button class="btn btn-primary btn-sm shadow-none" id="addCommentaire" type="button">Ajouter un commentaire</button>
+        </div>
+    </div>
 </div>
+<input type="hidden" id="token" value="{{ token }}"> 
+
+<script>
+    $( document ).ready(function() {
+
+        var token = $("#token").val();
+        var tokenParse = JSON.parse(token);
+
+        // -- Affichage du nom et prénom de l'auteur de la ressource --
+        //on parcourt pour chaque élément ayant la classe id auteur, on récupére son ID puis on fait une recherche de l'utilisateur qui l'a crée
+        var collection = $(".idauteur");
+        collection.each(function () {
+            var id = $(this).val();
+            $.ajax({
+                url: 'http://localhost:5000/users/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (json) {
+                    $('.nomAuteur-'+id).html(json.utilisateur.nomuser + ' ' + json.utilisateur.prenomuser);
+                }
+            });
+        });
+
+        // -- Affichage du type --
+        var typecollection = $(".idtype");
+        typecollection.each(function () {
+            var id = $(this).val();
+            $.ajax({
+                url: 'http://localhost:5000/rescat/type/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (json) {
+                    $('.type-res-'+id).html(json.ressourceType.libelletypres);
+                }
+            });
+        });
+
+        // -- Affichage de la catégorie --
+        var catcollection = $(".idcat");
+        catcollection.each(function () {
+            var id = $(this).val();
+            $.ajax({
+                url: 'http://localhost:5000/rescat/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (json) {
+                    $('.cat-res-'+id).html(json.ressourceCategory.libellecatres);
+                }
+            });
+        });
+
+        // -- Ajout de commentaire -- 
+        $("#addCommentaire").click(function() {
+            var contenu = $("#valueCommentaire").val();
+            var idUser = $(".idauteur").val();
+            var idRessource = $(".idressource").val();
+           
+            //console.log(tokenParse);
+            $.ajax({
+                data: {
+                    "contenu": contenu,
+                    "idUser" : idUser,
+                    "idRessource": idRessource
+                },
+                type : 'POST',
+                url : 'http://localhost:5000/res/comm/' +idRessource,
+                dataType : 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", 'Bearer '+ tokenParse.jwtToken);
+                },
+                success : function(json){
+                    alert('Commentaire ajouté avec succès');
+                    //location.reload();
+                },
+                error: function (result, status, err) {
+                    alert('Erreur : ' + result.responseText);
+                }
+            });
+        });
+
+    });
+</script>
 
 
 {{ include('elements/right-sidebar.tpl') }}
