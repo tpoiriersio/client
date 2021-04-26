@@ -10,7 +10,7 @@
             <label for="selectRole" class="form-label">Rôle</label>
             <select class="form-select" id="selectRole">
                 <option value="citoyen">Citoyen</option>
-                <option value="moderateur">Modérateur</option>
+                <option value="moderateur">Modérateur</option>  
                 <option value="administrateur">Administrateur</option>
             </select>
         </div>-->
@@ -41,7 +41,7 @@
         </div>
         <div class="mb-3">
             <label for="inputAdrese" class="form-label">Adresse</label>
-            <input type="text" class="form-control" id="inputAdrese">
+            <input type="text" class="form-control" id="inputAdresse">
         </div>
         <div class="mb-3">
             <label for="inputSituation" class="form-label">Situation familiale</label>
@@ -90,7 +90,7 @@ $( document ).ready(function() {
             $('#inputEmail').val(json.utilisateur.emailuser);
             $('#inputTel').val(json.utilisateur.teluser);
             $('#inputSituation').val(json.utilisateur.situationuser);
-            $('#inputAdrese').val(json.utilisateur.adresseuser);
+            $('#inputAdresse').val(json.utilisateur.adresseuser);
             
         },
     });
@@ -105,7 +105,7 @@ $( document ).ready(function() {
         var mdp = $("#inputPassword2").val();
         var adresse = $("#inputAdrese").val();
 
-        console.log(email + " " + prenom + " " + nom + " " + tel + " " + pays + " " + situation + " " + mdp + " " + adresse + " " + id);
+        //console.log(email + " " + prenom + " " + nom + " " + tel + " " + pays + " " + situation + " " + mdp + " " + adresse + " " + id);
         $.ajax({
             data: {
                 "email": email,

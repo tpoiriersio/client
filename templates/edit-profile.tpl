@@ -28,8 +28,24 @@
                     <input type="text" class="form-control" id="inputPays" value="{{ pays }}">
                 </div>
                 <div class="col-md-6">  
+                    <label for="inputAdresse" class="form-label">Adresse</label>
+                    <input type="text" class="form-control" id="inputAdresse" value="{{ adresse }}">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">  
                     <label for="inputEmail" class="form-label">Adresse email</label>
                     <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" value="{{ email }}">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">  
+                    <label for="inputTel" class="form-label">Téléphone</label>
+                    <input type="text" class="form-control" id="inputTel" value="{{ tel }}">
+                </div>
+                <div class="col-md-6">  
+                    <label for="inputPays" class="form-label">Situation</label>
+                    <input type="text" class="form-control" id="inputSituation" value="{{ situation }}">
                 </div>
             </div>
             <div class="row mt-3">
@@ -42,10 +58,11 @@
                     <input type="password" class="form-control" id="inputPassword2">
                 </div>
             </div>
-        <button type="submit" class="btn btn-primary" style="margin: 30px; left: 0;">Enregistrer</button>
+        <button type="button" id="register" class="btn btn-primary" style="margin: 30px; left: 0;">Enregistrer</button>
         </form>
     </div>
 </div>
+<input type="hidden" id="token" value="{{ token }}"> 
 
 {{ include('elements/right-sidebar.tpl') }}
 
@@ -57,6 +74,9 @@ $( document ).ready(function() {
     var searchParams = new URLSearchParams(window.location.search);
     searchParams.has('id') ;
     var id = searchParams.get('id');
+
+    var token = $("#token").val();
+    var tokenParse = JSON.parse(token);
 
     $.ajax({
         url : 'http://localhost:5000/users/'+id,
@@ -71,7 +91,52 @@ $( document ).ready(function() {
             $('#inputPrenom').val(json.utilisateur.prenomuser);
             $('#inputPays').val(json.utilisateur.paysuser);
             $('#inputEmail').val(json.utilisateur.emailuser);
+            $('#inputSituation').val(json.utilisateur.situationuser);
+            $('#inputAdresse').val(json.utilisateur.adresseuser);
+            $('#inputTel').val(json.utilisateur.teluser);
         },
+    });
+
+    $("#register").click(function() {
+        var email = $("#inputEmail").val();
+        var prenom = $("#inputPrenom").val();
+        var nom = $("#inputNom").val();
+        var tel = $("#inputTel").val();
+        var pays = $("#inputPays").val();
+        var situation = $("#inputSituation").val();
+        var adresse = $("#inputAdresse").val();
+        if($("#inputPassword2").val() == $("#inputPassword1").val()){
+            var mdp = $("#inputPassword1").val();
+        }else{
+            alert('Les mots de passe ne correspondent pas.');
+        }
+
+        console.log(email + " " + prenom + " " + nom + " " + tel + " " + pays + " " + situation + " " + mdp + " " + adresse + " " + id);
+        $.ajax({
+            data: {
+                "email": email,
+                "mdp" : mdp,
+                "nom": nom,
+                "prenom": prenom,
+                "tel": tel,
+                "adresse": adresse,
+                "pays": pays,
+                "situation": situation
+            },
+            type : 'PUT',
+            url : 'http://localhost:5000/users/update/'+ id,
+            dataType : 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", 'Bearer '+ tokenParse.jwtToken);
+            },
+            success : function(json){
+                alert('Utilisateur modifié avec succès.');
+                //location.reload();
+            },
+            error: function (result, status, err) {
+                alert('Erreur : ' + result.responseText);
+            }
+        });
     });
     
 });

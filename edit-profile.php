@@ -11,7 +11,8 @@ else {
         'titre_page' => 'Éditer mon profil',
         'isConnected' => $isConnected,
         'user' => $user,
-        'profile' => $profile
+        'profile' => $profile,
+        'token' => $_SESSION['jwtToken']
     ]);
 }
 
