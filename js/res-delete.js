@@ -15,7 +15,7 @@ $( ".btn-delete" ).click(function() {
         },
         success : function(json){
             alert('La ressource a été supprimée.');
-            location.reload();
+            document.location.href="home.php"; 
         },
         error: function (result, status, err) {
             alert('Erreur : ' + result.responseText);
