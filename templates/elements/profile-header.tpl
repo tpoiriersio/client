@@ -30,10 +30,12 @@
         <div class="col-md-2 mb-2 mt-2">
             <a href="relations.php?id={{profile.utilisateur.iduser}}" class="profile-navlink {% if titre_page == "Relations" %} active {% endif %}">Relations</a>
         </div>
+        {% if profile.utilisateur.iduser == user.utilisateur.iduser %}
         <!-- Si on se trouve sur notre propre page de profil, afficher ce bouton. Sur le profil de quelqu'un d'autre, le masquer. -->
         <div class="col-md-2 mb-2 mt-2">
             <a href="edit-profile.php?id={{profile.utilisateur.iduser}}" class="profile-navlink {% if titre_page == "Éditer mon profil" %} active {% endif %}">Éditer mon profil</a>
         </div>
+        {% endif %}
     </div>
 </div>
 
