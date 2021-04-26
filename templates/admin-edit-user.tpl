@@ -6,14 +6,14 @@
     {{ include('elements/admin-header.tpl') }}
     <div class="container rounded bg-white mt-5 mb-5 centerprofil">
     <form id="edit-profile">
-        <div class="mb-3">
+        <!--<div class="mb-3">
             <label for="selectRole" class="form-label">Rôle</label>
             <select class="form-select" id="selectRole">
                 <option value="citoyen">Citoyen</option>
                 <option value="moderateur">Modérateur</option>
                 <option value="administrateur">Administrateur</option>
             </select>
-        </div>
+        </div>-->
         <!--<div class="mb-3">
             <label for="inputAvatar" class="form-label">Image de profil</label>
             <input type="file" accept="image/png,image/jpeg" class="form-control" id="inputAvatar">
@@ -38,6 +38,10 @@
         <div class="mb-3">
             <label for="inputPays" class="form-label">Pays</label>
             <input type="text" class="form-control" id="inputPays">
+        </div>
+        <div class="mb-3">
+            <label for="inputAdrese" class="form-label">Adresse</label>
+            <input type="text" class="form-control" id="inputAdrese">
         </div>
         <div class="mb-3">
             <label for="inputSituation" class="form-label">Situation familiale</label>
@@ -86,6 +90,8 @@ $( document ).ready(function() {
             $('#inputEmail').val(json.utilisateur.emailuser);
             $('#inputTel').val(json.utilisateur.teluser);
             $('#inputSituation').val(json.utilisateur.situationuser);
+            $('#inputAdrese').val(json.utilisateur.adresseuser);
+            
         },
     });
 
@@ -95,35 +101,35 @@ $( document ).ready(function() {
         var nom = $("#inputNom").val();
         var tel = $("#inputTel").val();
         var pays = $("#inputPays").val();
-        var sitation = $("#inputSituation").val();
+        var situation = $("#inputSituation").val();
         var mdp = $("#inputPassword2").val();
+        var adresse = $("#inputAdrese").val();
 
-        //console.log(id);
-        
+        console.log(email + " " + prenom + " " + nom + " " + tel + " " + pays + " " + situation + " " + mdp + " " + adresse + " " + id);
         $.ajax({
             data: {
-            "email": email,
-            "prenom": prenom,
-            "nom": nom,
-            "tel": tel,
-            "pays": pays,
-            "sitation": sitation,
-            //"mdp": mdp
-            //"token": ,
-            },
-            url : 'http://localhost:5000/users/update/'+ id,
-            headers: {
-            'Accept':'application/json',
-            'Content-Type':'application/json',
-            'Authorization':'Bearer ' + tokenParse.jwtToken
+                "email": email,
+                "mdp" : mdp,
+                "nom": nom,
+                "prenom": prenom,
+                "tel": tel,
+                "adresse": adresse,
+                "pays": pays,
+                "situation": situation
             },
             type : 'PUT',
-            
+            url : 'http://localhost:5000/users/update/'+ id,
             dataType : 'json',
-            success : function(json){
-                //$("#fetchUsers").load(" #fetchUsers"); 
-                console.log("utilisateur modifié");
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", 'Bearer '+ tokenParse.jwtToken);
             },
+            success : function(json){
+                alert('Utilisateur modifié avec succès.');
+                location.reload();
+            },
+            error: function (result, status, err) {
+                alert('Erreur : ' + result.responseText);
+            }
         });
     });
 });

@@ -133,6 +133,7 @@ router.get("/:id", async (req, res) => {
 // UPDATE a User
 router.put("/update/:id", userAuth, async (req, res) => {
   try {
+
     if (req.idUser === req.params.id || req.isAdmin || req.isSuperAdmin) {
       const {
         email,
@@ -143,22 +144,24 @@ router.put("/update/:id", userAuth, async (req, res) => {
         adresse,
         pays,
         situation,
-        handicap,
+        //handicap,
       } = req.body;
+      const salt = await bcrypt.genSalt(10);
+      const saltMdp = await bcrypt.hash(mdp, salt);
       const result = await db.query(
         `UPDATE utilisateur SET
             emailUser = $1,mdpUser = $2, nomUser = $3, prenomUser = $4, telUser = $5,
-            adresseUser = $6, paysUser = $7, situationUser = $8, handicapUser = $9 WHERE idUser = $10 RETURNING *`,
+            adresseUser = $6, paysUser = $7, situationUser = $8 WHERE idUser = $9 RETURNING *`,
         [
           email,
-          mdp,
+          saltMdp,
           nom,
           prenom,
           tel,
           adresse,
           pays,
           situation,
-          handicap,
+          //handicap,
           req.params.id,
         ]
       );

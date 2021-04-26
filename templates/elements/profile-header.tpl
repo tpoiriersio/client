@@ -25,10 +25,10 @@
             <a href="resources-user.php?id={{profile.utilisateur.iduser}}" class="profile-navlink {% if titre_page == "Ressources publiées" %} active {% endif %} ">Publications</a>
         </div>
         <div class="col-md-2 mb-2 mt-2">
-            <a href="resources-favorites.php" class="profile-navlink {% if titre_page == "Ressources favorites" %} active {% endif %}">Favoris</a>
+            <a href="resources-favorites.php?id={{profile.utilisateur.iduser}}" class="profile-navlink {% if titre_page == "Ressources favorites" %} active {% endif %}">Favoris</a>
         </div>
         <div class="col-md-2 mb-2 mt-2">
-            <a href="relations.php" class="profile-navlink {% if titre_page == "Relations" %} active {% endif %}">Relations</a>
+            <a href="relations.php?id={{profile.utilisateur.iduser}}" class="profile-navlink {% if titre_page == "Relations" %} active {% endif %}">Relations</a>
         </div>
         <!-- Si on se trouve sur notre propre page de profil, afficher ce bouton. Sur le profil de quelqu'un d'autre, le masquer. -->
         <div class="col-md-2 mb-2 mt-2">

@@ -65,7 +65,6 @@
 <script>
 
     $( document ).ready(function() {
-
         $("#register").click(function() {
             var titre = $("#inputTitre").val();
             var illustration = $("#inputIllustration").val();
