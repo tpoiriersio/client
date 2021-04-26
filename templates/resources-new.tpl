@@ -35,8 +35,9 @@
                     <label for="selectTypRes" class="form-label">Type</label>
                     <select name="TypRes" class="form-control" id="selectTypRes">
                         <option value="">Choisissez un type</option>
-                        <option value="1">Image</option>
-                        <option value="2">Vidéo</option>
+                        {% for type in typelist.ressourceType %}
+                        <option value="{{ type.idtypres }}">{{ type.libelletypres }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>

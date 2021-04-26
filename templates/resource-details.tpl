@@ -103,6 +103,7 @@
             });
         });
 
+<<<<<<< HEAD
         // -- Affichage du type --
         var typecollection = $(".idtype");
         typecollection.each(function () {
@@ -114,6 +115,20 @@
                 success: function (json) {
                     $('.type-res-'+id).html(json.ressourceType.libelletypres);
                 }
+=======
+            // -- Affichage du type --
+            var typecollection = $(".idtype");
+            typecollection.each(function () {
+                var id = $(this).val();
+                $.ajax({
+                    url: 'http://localhost:5000/restyp/' + id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (json) {
+                        $('.type-res-'+id).html(json.ressourceType.libelletypres);
+                    }
+                });
+>>>>>>> 6ec1b9960c43336aac779802f272463e72e3cd93
             });
         });
 
