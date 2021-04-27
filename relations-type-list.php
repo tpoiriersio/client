@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/required/loader.php';
 
-if ($user['utilisateur']['issuperadmin'] == false && $user['utilisateur']['isadmin'] == false && $user['utilisateur']['ismoderateur'] == false)
+if ($user['utilisateur']['issuperadmin'] == false && $user['utilisateur']['isadmin'] == false)
 {
     echo("Accès non autorisé");
     header('Location: home.php');

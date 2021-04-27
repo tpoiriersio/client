@@ -53,7 +53,7 @@
                 </div>
             </div>
             <input type="hidden" id="token" value="{{ token }}">
-            <button type="button" class="btn btn-primary" id="register">Enregistrer</button>
+            <button type="button" class="btn btn-primary  mb-3 mt-3" id="register">Enregistrer</button>
         </form>
     </div>
 

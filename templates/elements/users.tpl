@@ -7,7 +7,7 @@
         {% set inrelation = true %}
         {% endif %}
         {% endfor %}
-        {% if (titre_page == 'Utilisateurs inscrits') or (titre_page == 'Relations' and inrelation == true) %}
+        {% if (titre_page == 'Utilisateurs inscrits') or (titre_page == 'Administration des utilisateurs') or (titre_page == 'Relations' and inrelation == true) %}
         <div class="col-md-6 user-card">
             <div class="card placementPublication relation-card" id="fetchUsers">
                 <h5 class="card-header">
