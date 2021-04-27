@@ -236,49 +236,4 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// ROUTES Favoris
-
-//POST favori
-router.post("/fav/:id", userAuth, async (req, res) => {
-  try {
-    const result = await db.query(
-      `INSERT INTO favori (idRessource,idUser) VALUES ($1,$2) RETURNING *`,
-      [req.idUser, req.body.id]
-    );
-    res.status(201).json({
-      status: "success",
-      favori: result,
-    });
-  } catch (err) {
-    res.status(500).json({ err });
-  }
-});
-
-//COUNT favori
-router.get("fav/:id", userAuth, async (req, res) => {
-  try {
-    const result = await db.query(
-      `COUNT * FROM favori WHERE idRessource='${req.body.id}'`
-    );
-  } catch (err) {
-    res.status(500).json({ err });
-  }
-});
-
-//DELETE favori
-router.delete("fav/:id", userAuth, async (req, res) => {
-  try {
-    const result = await db.query(
-      `DELETE FROM Favori WHERE idUser=$1 AND idRessource=$2`,
-      [req.idUser, req.body.id]
-    );
-    res.status(204).json({
-      status: "success",
-      message: "Favori Supprimé",
-    });
-  } catch (err) {
-    res.status(500).json({ err });
-  }
-});
-
 module.exports = router;

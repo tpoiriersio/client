@@ -12,6 +12,7 @@ const ressourceCategoriesRoutes = require("./routes/ressourceCategories");
 const ressourceTypesRoutes = require("./routes/ressourceTypes");
 const ressourcesRoutes = require("./routes/ressources");
 const participationRoutes = require("./routes/participation");
+const favorisRoutes = require("./routes/favoris");
 
 // Middlewares
 app.use(cors());
@@ -27,6 +28,7 @@ app.use("/rescat", ressourceCategoriesRoutes);
 app.use("/restyp", ressourceTypesRoutes);
 app.use("/res", ressourcesRoutes);
 app.use("/participation", participationRoutes);
+app.use("/fav", favorisRoutes);
 
 // Launching the server
 const port = process.env.PORT || 5001;

@@ -17,16 +17,31 @@ else {
     $getrelroute = "http://localhost:5000/rel/" . $profile['utilisateur']['iduser'];
     $rellist = json_decode(file_get_contents($getrelroute), true);
 
-    echo $twig->render('relations.tpl', [
-        'titre_page' => 'Relations',
-        'isConnected' => $isConnected,
-        'user' => $user,
-        'profile' => $profile,
-        'userslist' => $userslist,
-        'reltypelist' => $reltypelist,
-        'rellist' => $rellist,
-        'token' => $_SESSION['jwtToken']
-    ]);
+    if (isset ($_SESSION['jwtToken'])) {
+
+        echo $twig->render('relations.tpl', [
+            'titre_page' => 'Relations',
+            'isConnected' => $isConnected,
+            'user' => $user,
+            'profile' => $profile,
+            'userslist' => $userslist,
+            'reltypelist' => $reltypelist,
+            'rellist' => $rellist,
+            'token' => $_SESSION['jwtToken']
+        ]);
+    }
+    else
+    {
+        echo $twig->render('relations.tpl', [
+            'titre_page' => 'Relations',
+            'isConnected' => $isConnected,
+            'user' => $user,
+            'profile' => $profile,
+            'userslist' => $userslist,
+            'reltypelist' => $reltypelist,
+            'rellist' => $rellist
+        ]);
+    }
 }
 
 ?>

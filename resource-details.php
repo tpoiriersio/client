@@ -19,6 +19,9 @@ if (isset ($_SESSION['jwtToken'])) {
     // Personnes en relation avec soi
     $getrelroute = "http://localhost:5000/rel/" . $user['utilisateur']['iduser'];
     $rellist = json_decode(file_get_contents($getrelroute), true);
+    // Favoris de l'utilisateur
+    $getfavroute = "http://localhost:5000/fav/user/" . $user['utilisateur']['iduser'];
+    $favlist = json_decode(file_get_contents($getfavroute), true);
 
     echo $twig->render('resource-details.tpl', [
         'titre_page' => 'Détails de la ressource',
@@ -29,6 +32,7 @@ if (isset ($_SESSION['jwtToken'])) {
         'reltypelist' => $reltypelist,
         'rellist' => $rellist,
         'commentlist' => $commentlist,
+        'favlist' => $favlist,
         'token' => $_SESSION['jwtToken'],
     ]);
 }

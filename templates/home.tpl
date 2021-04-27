@@ -22,6 +22,7 @@
 {{ include('elements/footer.tpl') }}
 
 <script src="js/res-delete.js"></script>
+<script src="js/res-fav.js"></script>
 <script src="js/relation-invite.js"></script>
 <script>
     $(document).ready(function(){
