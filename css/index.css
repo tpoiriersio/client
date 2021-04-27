@@ -30,7 +30,7 @@ body {
     background: -webkit-linear-gradient(270deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
     background: linear-gradient(180deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);*/
     /*overflow:hidden;*/
-    background-color: #fafafa!important;
+    background-color: #fafafa;
 }
 p{
     margin-top: 50px !important;
@@ -146,7 +146,7 @@ a.button:hover {
     box-shadow: none;
     border-radius: 0;
     border-top: 1px solid #4FC1B7;
-    background-color: #e7e7e7 !important;
+    background: #fafafa !important;
 }
 .user .actions {
     margin: 1em 0 0;
