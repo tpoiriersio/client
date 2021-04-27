@@ -144,6 +144,21 @@ router.delete("/delete/:id", userAuth, async (req, res) => {
   }
 });
 
+//GET ALL Commentaires
+router.get("/comm", async (req, res) => {
+  try {
+    const result = await db.query(
+        "SELECT * FROM commentaire"
+    );
+    res.status(200).json({
+      status: "success",
+      commentaires: result.rows,
+    });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 //POST Commentaire
 router.post("/comm/:id", userAuth, async (req, res) => {
   try {

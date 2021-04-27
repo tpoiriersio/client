@@ -64,19 +64,31 @@
                         <h4 class="card-title">Commentaires récents</h4>
                     </div>
                     <div class="comment-widgets m-b-20">
+                        {% for comment in commentlist.commentaires %}
+                        {% if ressource.ressource.idressource == comment.idressource %}
                         <div class="d-flex flex-row comment-row ">
+                            <input class="idauteurcomm" type="hidden" value="{{ comment.iduser }}">
                             <div class="p-2"><span class="round"><img src="https://i.imgur.com/tT8rjKC.jpg" alt="user" width="50"></span></div>
                             <div class="comment-text active w-100">
-                                <h5>Jonty Andrews</h5>
-                                <div class="comment-footer"> <span class="date">March 13, 2020</span> <span class="label label-success">Approved</span> <span class="action-icons active"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right text-success"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart text-danger"></i></a> </span> </div>
-                                <p class="m-b-5 m-t-10">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites</p>
+                                <h5 class="nomAuteurComm-{{ comment.iduser }}">Nom prénom</h5>
+                                <div class="comment-footer"> <span class="date">{{ comment.datecommentaire|split('T')[0] }}</span>
+                                    <span class="action-icons active">
+                                        <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a>
+                                        <a href="#" data-abc="true"><i class="fa fa-rotate-right text-success"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart text-danger"></i></a> </span> </div>
+                                <p class="m-b-5 m-t-10">
+                                    {{ comment.contenucommentaire }}
+                                </p>
                             </div>
                         </div>
+                        {% endif %}
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {% if isConnected %}
     <div class="bg-light p-2">
         <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
             <textarea class="form-control ml-1 shadow-none textarea" id="valueCommentaire"></textarea>
@@ -85,6 +97,7 @@
             <button class="btn btn-primary btn-sm shadow-none" id="addCommentaire" type="button">Ajouter un commentaire</button>
         </div>
     </div>
+    {% endif %}
 </div>
 
 <div id="relation-window" class="container-fluid">
@@ -147,6 +160,19 @@
             });
         });
 
+        // -- Affichage du nom et prénom de l'auteur pour les commentaires --
+        var commentcollection = $(".idauteurcomm");
+        commentcollection.each(function () {
+            var id = $(this).val();
+            $.ajax({
+                url: 'http://localhost:5000/users/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (json) {
+                    $('.nomAuteurComm-'+id).html(json.utilisateur.nomuser + ' ' + json.utilisateur.prenomuser);
+                }
+            });
+        });
 
         // -- Affichage du type --
         var typecollection = $(".idtype");

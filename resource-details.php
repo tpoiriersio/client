@@ -5,6 +5,10 @@ $resId = $_GET['id'];
 $getres = "http://localhost:5000/res/" . $resId;
 $ressource = json_decode(file_get_contents($getres), true);
 
+// Commentaires de la ressource
+$getcommentroute = "http://localhost:5000/res/comm";
+$commentlist = json_decode(file_get_contents($getcommentroute), true);
+
 if (isset ($_SESSION['jwtToken'])) {
     // Utilisateurs
     $getusersroute = "http://localhost:5000/users";
@@ -24,6 +28,7 @@ if (isset ($_SESSION['jwtToken'])) {
         'userslist' => $userslist,
         'reltypelist' => $reltypelist,
         'rellist' => $rellist,
+        'commentlist' => $commentlist,
         'token' => $_SESSION['jwtToken'],
     ]);
 }
@@ -32,7 +37,9 @@ else {
         'titre_page' => 'Détails de la ressource',
         'isConnected' => $isConnected,
         'user' => $user,
-        'ressource' => $ressource
+        'ressource' => $ressource,
+        'commentlist' => $commentlist
+
     ]);
 }
 
