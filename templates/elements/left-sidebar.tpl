@@ -5,7 +5,7 @@
             {{ include('elements/logo-svg.tpl') }}
         </a>
         <hr class="d-none d-lg-block">
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand d-lg-none toggler">{{ include('elements/logo-r.tpl') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

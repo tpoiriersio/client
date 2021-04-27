@@ -109,7 +109,7 @@
 @media (max-width: 768px) {
   .navbar-expand-lg {
     position: fixed;
-    background-color: #212529;
+    background-color: #fafafa;
     width: 100%;
     z-index: 1000;
     margin: 0;
