@@ -1,7 +1,7 @@
 
 <div class="col-md-2 order-1 left-sidebar bg-dark ">
     <div class="d-flex flex-column p-3 text-white sticky-top">
-        <a href="home.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none d-none d-lg-block">
+        <a href="home.php" class="d-flex align-items-center mb-3 mb-md-0 text-white text-decoration-none d-none d-lg-block">
             {{ include('elements/logo-svg.tpl') }}
         </a>
         <hr class="d-none d-lg-block">
