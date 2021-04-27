@@ -71,7 +71,7 @@
                             <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle me-2">
                             <div class="col-md-12 comment-text active w-100">
                                 <h5 class="nomAuteurComm-{{ comment.iduser }}">Nom prénom</h5>
-                                <div class="comment-footer"> <span class="date">{{ comment.datecommentaire|split('T')[0] }}</span>
+                                <div class="comment-footer d-flex"><span class="date">{{ comment.datecommentaire|split('T')[0] }}</span>
                                     <span class="action-icons active">
                                         <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a>
                                         <a href="#" data-abc="true"><i class="fa fa-rotate-right text-success"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart text-danger"></i></a> </span> </div>

@@ -1,5 +1,5 @@
 <div class="col-md-2 order-2 order-md-3 right-sidebar bg-dark">
-    <div class="d-flex flex-column p-3 text-white sticky-top">
+    <div class="d-flex flex-column p-3 sticky-top">
         <h6>Ressources populaires</h6>
         <hr>
         <ol class="list-group list-group-numbered">

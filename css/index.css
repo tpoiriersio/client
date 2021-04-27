@@ -30,7 +30,10 @@ body {
     background: -webkit-linear-gradient(270deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
     background: linear-gradient(180deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);*/
     /*overflow:hidden;*/
-    background-color: #3d434a!important;
+    background-color: #fafafa!important;
+}
+p{
+    margin-top: 50px !important;
 }
 
 .bodyIndex{
@@ -936,4 +939,10 @@ input {
     -webkit-box-shadow: 10px 10px 5px 24px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 5px 24px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 5px 24px rgba(0,0,0,0.75);
+}
+
+.form-control{
+    border: 1px rgba(0, 0, 0, .25) !important;
+    border-radius: 9px;
+    box-shadow: 2px 4px 4px rgba(0,0,0,.25);
 }
