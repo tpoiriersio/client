@@ -58,7 +58,7 @@
 
     <div class="container d-flex justify-content-center mt-100 mb-100">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col" style="width: 1150px !important;">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Commentaires récents</h4>
@@ -66,10 +66,10 @@
                     <div class="comment-widgets m-b-20">
                         {% for comment in commentlist.commentaires %}
                         {% if ressource.ressource.idressource == comment.idressource %}
-                        <div class="d-flex flex-row comment-row ">
+                        <div class="d-flex flex-row comment-row">
                             <input class="idauteurcomm" type="hidden" value="{{ comment.iduser }}">
-                            <div class="p-2"><span class="round"><img src="https://i.imgur.com/tT8rjKC.jpg" alt="user" width="50"></span></div>
-                            <div class="comment-text active w-100">
+                            <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle me-2">
+                            <div class="col-md-12 comment-text active w-100">
                                 <h5 class="nomAuteurComm-{{ comment.iduser }}">Nom prénom</h5>
                                 <div class="comment-footer"> <span class="date">{{ comment.datecommentaire|split('T')[0] }}</span>
                                     <span class="action-icons active">
@@ -89,8 +89,8 @@
         </div>
     </div>
     {% if isConnected %}
-    <div class="bg-light p-2">
-        <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+    <div class="bg-light p-2" style="width: 1125px !important; margin-left: 60px !important; margin-bottom: 50px !important">
+        <div class="d-flex flex-row align-items-start"><img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
             <textarea class="form-control ml-1 shadow-none textarea" id="valueCommentaire"></textarea>
         </div>
         <div class="mt-2 text-right">

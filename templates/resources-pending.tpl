@@ -45,6 +45,21 @@
             },
             success : function(json){
                 for (let i = 0; i <= Object.keys(json).length; i++) {
+
+                    $.ajax({
+                        url : 'http://localhost:5000/users/'+ json.ressources[i]['idauteur'],
+                        type : 'GET',
+                        dataType : 'json',
+                        success : function(json){
+                            //console.log(json);
+                            $('.nomAuteur').html(json.utilisateur.nomuser + " " +  json.utilisateur.prenomuser);   
+                            /*$.each(json, function(k, v) {
+                                console.log(v.nomuser + " " +  v.prenomuser);
+                                $('.nomAuteur').html(v.nomuser + " " +  v.prenomuser);          
+                            });   */         
+                        },
+                    });
+
                     var retour = '<div class="card placementPublication"><h5 class="card-header"><img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2"><strong class="nomAuteur"></strong></h5>';
 
                     var retourContenu = '<div class="card-body">' +
@@ -77,18 +92,8 @@
                         '{% endif %}'+
                         '{% endif %}'+
                         '</div></div>';
-
-
-                    $.ajax({
-                        url : 'http://localhost:5000/users/'+ json.ressources[i]['idauteur'],
-                        type : 'GET',
-                        dataType : 'json',
-                        success : function(json){
-                            $('.nomAuteur').html(json.utilisateur.nomuser + " " +json.utilisateur.prenomuser);
-                        },
-                    });
-
-                    $("#res-container").html($("#res-container").html() + retour + retourContenu );
+                        
+                    $("#res-container").html($("#res-container").html() + retour + retourContenu);
 
                     $( ".btn-validate" ).click(function() {
                         var id = this.id;
@@ -135,11 +140,9 @@
                             }
                         });
                     });
-
                 }
             },
         });
-
     });
 </script>
 

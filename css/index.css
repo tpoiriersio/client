@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap%27');
 /* GENERAL RESETS */
 
 html {
@@ -18,9 +19,10 @@ a:hover {
 
 /* BODY */
 body {
+    font-family: "Poppins";
     position: relative;
     color: #666;
-    font: 16px/26px "Raleway", sans-serif;
+    /*font: 16px/26px "Raleway", sans-serif;*/
     text-align: center;
     height: 100%;
     /*background: -moz-linear-gradient(270deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
@@ -32,10 +34,13 @@ body {
 }
 
 .bodyIndex{
-    background: -moz-linear-gradient(270deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
+   /* background: -moz-linear-gradient(270deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(34,46,64,1)), color-stop(100%, rgba(81,195,184,1)));
     background: -webkit-linear-gradient(270deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
     background: linear-gradient(180deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
+    background: rgb(16,52,166);
+    background: linear-gradient(0deg, rgba(16,52,166,1) 0%, rgba(29,161,242,1) 100%);*/
+    background-color: #d9d9d9 !important;
 }
 
 .container{
@@ -129,15 +134,16 @@ a.button:hover {
     width: 100%;
     height: 100vh;
     overflow: auto;
-    background: -moz-linear-gradient(48deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%);
+    /*background: -moz-linear-gradient(48deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%);
     background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(42,46,54,1)), color-stop(100%, rgba(97,107,125,1)));
     background: -webkit-linear-gradient(48deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%);
-    background: linear-gradient(42deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%);
+    background: linear-gradient(42deg, rgba(42,46,54,1) 0%, rgba(97,107,125,1) 100%);*/
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     border-radius: 0;
     border-top: 1px solid #4FC1B7;
+    background-color: #e7e7e7 !important;
 }
 .user .actions {
     margin: 1em 0 0;
@@ -506,7 +512,7 @@ a.button:hover {
     line-height: .5em;
 }
 #slideshow p {
-  color: #fff;
+  color: black;
   display: none;
 }
 #slideshow div {
@@ -524,10 +530,12 @@ a.button:hover {
 }
 
 .content{
-    background-image: url("https://connects.tiao.world/build/assets/AppBundle/img/placeholders/backgrounds/login.b5a57a73.jpg");
+    background-image: url();
     background-repeat: no-repeat;
     background-position: 0%;
-
+    color: black;
+    background-color: #f9f9f9 !important;
+    padding: 20px !important;
 }
 
 /* FORM ELEMENTS */
@@ -539,9 +547,9 @@ input {
     margin: 2em auto 0;
 }
 .form-wrap a {
-    color: #ccc;
+    /*color: #ccc;*/
     padding-bottom: 4px;
-    border-bottom: 1px solid #5FD1C1;
+    border-bottom: 1px solid #1da1f2;
 }
 .form-wrap a:hover {
     color: #fff;
@@ -556,7 +564,6 @@ input {
     transition: .25s ease-in-out;
 }
 
-
 .form-wrap .tabs h3 {
     float: left;
     width: 50%;
@@ -570,11 +577,11 @@ input {
     border: 0;
  }
 .form-wrap .tabs h3 a.active {
-    color: #ccc;
+    color: #1da2f1;
 }
 .form-wrap .tabs h3 a.active span {
     padding-bottom: 4px;
-    border-bottom: 1px solid #5FD1C1;
+    border-bottom: 1px solid #1da1f2;
 }
 .form-wrap .tabs-content {
     padding: 1.5em 3em;
@@ -604,26 +611,29 @@ input {
     -moz-box-sizing: border-box;
     color: inherit;
     font-family: inherit;
-    color: #fff;
+    color: black;
 }
 .form-wrap form .button {
     margin: 1em 0;
-    padding: .2em 3em;
+    padding: .5em 3em;
     width: auto;
-    display: block;
+    display: inline-block;
     background-color: #28A55F;
     border: none;
     color: #fff;
     cursor: pointer;
     font-size: .8em;
     border-radius: 30px;
-    background: -moz-linear-gradient(270deg, rgba(105,221,201,1) 0%, rgba(78,193,182,1) 100%);
+    /*background: -moz-linear-gradient(270deg, rgba(105,221,201,1) 0%, rgba(78,193,182,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(105,221,201,1)), color-stop(100%, rgba(78,193,182,1)));
     background: -webkit-linear-gradient(270deg, rgba(105,221,201,1) 0%, rgba(78,193,182,1) 100%);
-    background: linear-gradient(180deg, rgba(105,221,201,1) 0%, rgba(78,193,182,1) 100%);
+    background: linear-gradient(180deg, rgba(105,221,201,1) 0%, rgba(78,193,182,1) 100%);*/
+    background: rgb(29,161,242);
+    background: linear-gradient(90deg, rgba(29,161,242,1) 0%, rgba(16,52,166,1) 100%);
     -webkit-box-shadow: 0px 0px 37px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 37px -9px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 37px -9px rgba(0,0,0,0.75);
+
 }
 .form-wrap form .button:hover {
     background-color: #4FDA8C;
@@ -818,6 +828,7 @@ input {
         box-shadow: -3px 0px 45px -6px rgba(56,75,99,0.61);
         border-radius: 0 10px 10px 0;
         border: 0;
+        padding: 20px !important;
     }
     .user .actions {
         margin: 0;
@@ -914,4 +925,15 @@ input {
 .element.inactive {
   opacity: 0.0;
   transform: scale(1) translate3d(0,0,0);
+}
+
+.svg-bottom{
+    height: 15vh;
+}
+
+.shadowdiv{
+    /*border: 1px #d7d7d7 !important;*/
+    -webkit-box-shadow: 10px 10px 5px 24px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 24px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 24px rgba(0,0,0,0.75);
 }

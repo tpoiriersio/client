@@ -1,4 +1,3 @@
-
 {{ include('elements/header.tpl') }}
 <body class="bodyIndex">
     <div class="login">
@@ -24,9 +23,12 @@
             <div class="content">
                 <div id="slideshow">
                     <a href="home.php">
-                        <div class="one">
+                        <div class="one d-flex flex-column">             
                             {{ include('elements/logo-svg.tpl') }}
-                            <p>Rejoignez Ressource Relationnelle dès maintenant</p>
+                            <p>A vos ressources, citoyens !</p>
+                            <div class="d-flex svg-bottom p-6">
+                            {{ include('elements/bottom-svg.tpl') }}
+                            </div>
                         </div>
                     </a>
                 </div>
@@ -44,7 +46,7 @@
                                 <input type="password" class="input" id="user_pass" name="mdp" autocomplete="off" placeholder="Mot de passe">
                                 <input type="checkbox" class="checkbox" checked id="remember_me">
                                 <label for="remember_me">Se souvenir de moi</label>
-                                <input type="button" class="button" value="Se connecter" onclick="connexion()">
+                                <input type="button" class="button" value="SE CONNECTER" onclick="connexion()">
                             </form>
                             <div class="help-action">
                                 <p><i class="fa fa-arrow-left" aria-hidden="true"></i><a class="forgot" href="#">Mot de passe oublié ?</a></p>
@@ -63,7 +65,7 @@
                                 <label>Handicapé</label>
                                 <input type="checkbox" class="input" id="user_handicap" name="handicap" placeholder="Handicap">
 
-                                <input type="button" class="button" value="S'inscrire"  onclick="inscription()">
+                                <input type="button" class="button" value="S'INSCRIRE"  onclick="inscription()">
                             </form>
                         </div>
                     </div>
