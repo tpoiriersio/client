@@ -199,9 +199,7 @@
             //console.log(tokenParse);
             $.ajax({
                 data: {
-                    "contenu": contenu,
-                    "idUser" : idUser,
-                    "idRessource": idRessource
+                    "contenu": contenu
                 },
                 type : 'POST',
                 url : 'http://localhost:5000/res/comm/' +idRessource,
@@ -211,7 +209,7 @@
                 },
                 success : function(json){
                     alert('Commentaire ajouté avec succès');
-                    //location.reload();
+                    location.reload();
                 },
                 error: function (result, status, err) {
                     alert('Erreur : ' + result.responseText);

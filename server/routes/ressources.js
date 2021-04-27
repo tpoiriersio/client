@@ -144,23 +144,33 @@ router.delete("/delete/:id", userAuth, async (req, res) => {
   }
 });
 
+//POST Commentaire
 router.post("/comm/:id", userAuth, async (req, res) => {
   try {
     const { contenu, idUser } = req.body;
 
     const commentaire = await db.query(
       "INSERT INTO commentaire (contenuCommentaire, idUser, idRessource) VALUES ($1, $2, $3) RETURNING *",
-      [contenu, idUser, req.params.id]
+      [contenu, req.idUser, req.params.id]
+    );
+
+    /*const commsRess = await db.query(
+        `SELECT commentaires FROM ressource WHERE idRessource = '${req.params.id}'`
+    );
+
+    const commentaires = commsRess.rows[0].push(
+        commentaire.rows[0].idcommentaire
     );
 
     const ajoutCommRess = await db.query(
-      `INSERT INTO ressource (commentaires) VALUES ($1) WHERE idRessource=$2 RETURNING *`,
-      [commentaire.rows[0].idcommentaire, req.params.id]
-    );
+        `INSERT INTO ressource (commentaires) VALUES ($1) WHERE idRessource=$2 RETURNING *`,
+        [commentaires, req.params.id]
+    );*/
 
     res.status(200).json({
-      commentaire: commentaire.rows[0],
-      ressource: ajoutCommRess.rows[0],
+      /*commentaire: commentaire.rows[0],
+      ressource: ajoutCommRess.rows[0],*/
+      status: "success",
     });
   } catch (err) {
     res.status(500).json({ err });
