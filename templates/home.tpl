@@ -15,11 +15,14 @@
     </div>
 </div>
 
+{{ include('elements/relations-window.tpl') }}
+
 {{ include('elements/right-sidebar.tpl') }}
 
 {{ include('elements/footer.tpl') }}
 
 <script src="js/res-delete.js"></script>
+<script src="js/relation-invite.js"></script>
 <script>
     $(document).ready(function(){
         // -- Rechercher une ressource --
