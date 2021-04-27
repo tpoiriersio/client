@@ -155,16 +155,24 @@ router.delete("/delete/:id", userAuth, async (req, res) => {
 
 router.post("/comm/:id", userAuth, async (req, res) => {
   try {
-    const { contenu, idUser } = req.body;
+    const { contenu } = req.body;
 
     const commentaire = await db.query(
-      "INSERT INTO commentaire (contenuCommentaire, idUser, idRessource) VALUES ($1, $2, $3) RETURNING *",
-      [contenu, idUser, req.params.id]
+      `INSERT INTO commentaire (contenucommentaire, iduser, idressource) VALUES ($1, $2, $3) RETURNING *`,
+      [contenu, req.idUser, req.params.id]
+    );
+
+    const commsRess = await db.query(
+      `SELECT commentaires FROM ressources WHERE idressource=${req.params.id}`
+    );
+
+    const commentaires = commsRess.rows[0].push(
+      commentaire.rows[0].idcommentaire
     );
 
     const ajoutCommRess = await db.query(
-      `INSERT INTO ressource (commentaires) VALUES ($1) WHERE idRessource=$2 RETURNING *`,
-      [commentaire.rows[0].idcommentaire, req.params.id]
+      `INSERT INTO ressource (commentaires) VALUES ($1) WHERE idressource=$2 RETURNING *`,
+      [commentaires, req.params.id]
     );
 
     res.status(200).json({

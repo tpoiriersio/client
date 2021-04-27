@@ -91,7 +91,8 @@ $( document ).ready(function() {
             $('#inputTel').val(json.utilisateur.teluser);
             $('#inputSituation').val(json.utilisateur.situationuser);
             $('#inputAdresse').val(json.utilisateur.adresseuser);
-            
+            $('#inputPassword1').val(json.utilisateur.mdpuser);
+            $('#inputPassword2').val(json.utilisateur.mdpuser);   
         },
     });
 

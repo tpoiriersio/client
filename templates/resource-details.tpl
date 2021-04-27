@@ -103,7 +103,6 @@
             });
         });
 
-<<<<<<< HEAD
         // -- Affichage du type --
         var typecollection = $(".idtype");
         typecollection.each(function () {
@@ -115,20 +114,6 @@
                 success: function (json) {
                     $('.type-res-'+id).html(json.ressourceType.libelletypres);
                 }
-=======
-            // -- Affichage du type --
-            var typecollection = $(".idtype");
-            typecollection.each(function () {
-                var id = $(this).val();
-                $.ajax({
-                    url: 'http://localhost:5000/restyp/' + id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (json) {
-                        $('.type-res-'+id).html(json.ressourceType.libelletypres);
-                    }
-                });
->>>>>>> 6ec1b9960c43336aac779802f272463e72e3cd93
             });
         });
 
@@ -152,12 +137,9 @@
             var idUser = $(".idauteur").val();
             var idRessource = $(".idressource").val();
            
-            //console.log(tokenParse);
             $.ajax({
                 data: {
-                    "contenu": contenu,
-                    "idUser" : idUser,
-                    "idRessource": idRessource
+                    "contenu ": contenu
                 },
                 type : 'POST',
                 url : 'http://localhost:5000/res/comm/' +idRessource,
@@ -167,7 +149,7 @@
                 },
                 success : function(json){
                     alert('Commentaire ajouté avec succès');
-                    //location.reload();
+                    location.reload();
                 },
                 error: function (result, status, err) {
                     alert('Erreur : ' + result.responseText);
