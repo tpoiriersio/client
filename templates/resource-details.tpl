@@ -78,6 +78,17 @@
                                 <p class="m-b-5 m-t-10">
                                     {{ comment.contenucommentaire }}
                                 </p>
+                                {% if comment.iduser == user.utilisateur.iduser
+                                or user.utilisateur.issuperadmin
+                                or user.utilisateur.isadmin
+                                or user.utilisateur.ismoderateur
+                                %}
+                                <a id="{{ comment.idcommentaire }}" title="Supprimer définitivement" class="bouton-ressource btn-delete-comment">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                    </svg>
+                                </a>
+                                {% endif %}
                             </div>
                         </div>
                         {% endif %}
@@ -187,6 +198,32 @@
                 success : function(json){
                     alert('Commentaire ajouté avec succès');
                     location.reload();
+                },
+                error: function (result, status, err) {
+                    alert('Erreur : ' + result.responseText);
+                }
+            });
+        });
+
+        // Suppression de commentaire
+        $( ".btn-delete-comment" ).click(function() {
+            var token = $("#token").val();
+            var tokenParse = JSON.parse(token);
+            var id = this.id;
+            console.log(id);
+            $.ajax({
+                type : 'DELETE',
+                url : 'http://localhost:5000/res/comm/delete/' + id,
+                data: {
+                    "id": id
+                },
+                dataType : 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", 'Bearer '+ tokenParse.jwtToken);
+                },
+                success : function(json){
+                    alert('Le commentaire a été supprimé.');
+                    document.location.reload();
                 },
                 error: function (result, status, err) {
                     alert('Erreur : ' + result.responseText);

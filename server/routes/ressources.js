@@ -192,6 +192,35 @@ router.post("/comm/:id", userAuth, async (req, res) => {
   }
 });
 
+//DELETE Commentaire
+router.delete("/comm/delete/:id", userAuth, async (req, res) => {
+  const { id } = req.body;
+  try {
+    const ressource = await db.query(
+        `SELECT * from commentaire where idCommentaire=$1`,
+        [id]
+    );
+    if (
+        req.idUser === ressource.rows[0].idauteur ||
+        req.isAdmin ||
+        req.isSuperAdmin ||
+        req.isModerateur
+    ) {
+      const result = await db.query(
+          `DELETE FROM commentaire WHERE idCommentaire = '${req.params.id}'`
+      );
+      res.status(200).json({
+        status: "success",
+        message: "Commentaire supprimé",
+      });
+    } else {
+      res.status(401).json({ message: "Non Autorisé" });
+    }
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 // GET ONE Ressource BY ID
 router.get("/:id", async (req, res) => {
   try {
