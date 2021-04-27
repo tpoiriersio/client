@@ -12,13 +12,26 @@
     position: revert;
   }
 }
+.navbar-brand {
+  width: 30px;
+}
 .left-sidebar,
 .right-sidebar {
   padding: 0;
 }
+@media (max-width: 768px) {
+  .left-sidebar {
+    margin-top: 40px;
+  }
+}
 .sidebar-column {
   margin-left: auto;
   margin-right: auto;
+}
+@media (max-width: 768px) {
+  #navbarSupportedContent {
+    margin-top: 20px;
+  }
 }
 .placementPublication {
   margin-top: 20px;
@@ -91,5 +104,20 @@
 }
 .lh-tight {
   line-height: 1.25;
+}
+@media (max-width: 768px) {
+  .navbar-expand-lg {
+    position: fixed;
+    background-color: #212529;
+    width: 100%;
+    z-index: 1000;
+    margin: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0px 0px 5px black;
+  }
 }
 /*# sourceMappingURL=sidebars.css.map */

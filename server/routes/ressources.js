@@ -84,16 +84,7 @@ router.post("/create", userAuth, async (req, res) => {
 router.put("/update", userAuth, async (req, res) => {
   const { id, titre, illustration, message, duree, TypRes, CatRes } = req.body;
   try {
-    const idTypRes = await db.query(
-      `SELECT idTypRes FROM type_ressource WHERE libelleTypRes=$1`,
-      [TypRes]
-    );
-    const idCatRes = await db.query(
-      `SELECT idCatRes FROM categorie_ressource WHERE idCatRes=$1`,
-      [CatRes]
-    );
-
-    const ressource = await db.query(
+      const ressource = await db.query(
       `SELECT * from ressource where idRessource=$1`,
       [id]
     );
@@ -107,8 +98,8 @@ router.put("/update", userAuth, async (req, res) => {
       const result = await db.query(
         `UPDATE ressource SET
             titreRessource = $1, illustrationRessource = $2, messageRessource = $3, dureeRessource = $4, idTypRes = $5,
-            idCatRes = $6, isVerified = false RETURNING *`,
-        [titre, illustration, message, duree, idTypRes, idCatRes]
+            idCatRes = $6, isVerified = false WHERE idressource = $7 RETURNING *`,
+        [titre, illustration, message, duree, TypRes, CatRes, id]
       );
 
       res.status(200).json({

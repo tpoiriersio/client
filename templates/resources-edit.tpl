@@ -9,25 +9,25 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="inputTitre" class="form-label">Titre</label>
-                    <input type="text" name="titre" class="form-control" id="inputTitre">
+                    <input type="text" name="titre" class="form-control" id="inputTitre" value="{{ ressource.ressource.titreressource }}">
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="inputIllustration" class="form-label">Illustration</label>
-                    <input type="file" name="illustration" accept="image/png,image/jpeg" class="form-control" id="inputIllustration">
+                    <input type="file" name="illustration" accept="image/png,image/jpeg" class="form-control" id="inputIllustration" value="{{ ressource.ressource.illustrationressource }}">
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="inputMessage" class="form-label">Message</label>
-                    <textarea rows="5" name="message" class="form-control" id="inputMessage"></textarea>
+                    <textarea rows="5" name="message" class="form-control" id="inputMessage" value="{{ ressource.ressource.messageressource }}">{{ ressource.ressource.messageressource }}</textarea>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="inputDuree" class="form-label">Durée (minutes)</label>
-                    <input type="number" name="duree" class="form-control" id="inputDuree">
+                    <input type="number" name="duree" class="form-control" id="inputDuree" value="{{ ressource.ressource.dureeressource }}">
                 </div>
             </div>
             <div class="row mt-3">
@@ -36,7 +36,7 @@
                     <select name="TypRes" class="form-control" id="selectTypRes">
                         <option value="">Choisissez un type</option>
                         {% for type in typelist.ressourceType %}
-                        <option value="{{ type.idtypres }}">{{ type.libelletypres }}</option>
+                        <option value="{{ type.idtypres }}" {% if ressource.ressource.idtypres == type.idtypres %}selected="selected"{% endif %}>{{ type.libelletypres }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -47,12 +47,13 @@
                     <select name="CatRes" class="form-control" id="selectCatRes">
                         <option value="">Choisissez une catégorie</option>
                         {% for cat in catlist.ressourceCategories %}
-                        <option value="{{ cat.idcatres }}">{{ cat.libellecatres }}</option>
+                        <option value="{{ cat.idcatres }}" {% if ressource.ressource.idcatres == cat.idcatres %}selected="selected"{% endif %}>{{ cat.libellecatres }}</option>
                         {% endfor %}
                     </select>
                 </div>
             </div>
             <input type="hidden" id="token" value="{{ token }}">
+            <input type="hidden" id="resid" value="{{  ressource.ressource.idressource }}">
             <button type="button" class="btn btn-primary  mb-3 mt-3" id="register">Enregistrer</button>
         </form>
     </div>
@@ -67,6 +68,7 @@
 
     $( document ).ready(function() {
         $("#register").click(function() {
+            var id = $("#resid").val();
             var titre = $("#inputTitre").val();
             var illustration = $("#inputIllustration").val();
             var message = $("#inputMessage").val();
@@ -77,10 +79,11 @@
             var tokenParse = JSON.parse(token);
 
             $.ajax({
-                type : 'POST',
-                url : 'http://localhost:5000/res/create',
+                type : 'PUT',
+                url : 'http://localhost:5000/res/update',
 
                 data: {
+                    "id" : id,
                     "titre": titre,
                     "illustration": illustration,
                     "message": message,
@@ -93,7 +96,7 @@
                     xhr.setRequestHeader("Authorization", 'Bearer '+ tokenParse.jwtToken);
                 },
                 success : function(json){
-                    alert('La ressource a été créée avec succès.');
+                    alert('La ressource a été modifiée avec succès. Elle devra être validée à nouveau.');
                     location.reload();
                 },
                 error: function (result, status, err) {

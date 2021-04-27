@@ -2,7 +2,7 @@
 require __DIR__ . '/required/loader.php';
 
 // Empêche le visiteur non connecté d'aller sur son propre profil, mais peut toujours voir celui des autres
-if ($isConnected == false && $profile == '') {
+if ($isConnected == false || $profile['utilisateur']['iduser'] != $user['utilisateur']['iduser']) {
     echo("Accès non autorisé");
     header('Location: home.php');
 }

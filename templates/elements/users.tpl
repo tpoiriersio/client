@@ -1,6 +1,13 @@
 <div id="users-list" class="container">
     <div class="row">
     {% for key, utilisateur in userslist.utilisateurs %}
+        {% set inrelation = false %}
+        {% for relation in rellist.relations %}
+        {% if utilisateur.iduser in relation %}
+        {% set inrelation = true %}
+        {% endif %}
+        {% endfor %}
+        {% if (titre_page == 'Utilisateurs inscrits') or (titre_page == 'Administration des utilisateurs') or (titre_page == 'Relations' and inrelation == true) %}
         <div class="col-md-6 user-card">
             <div class="card placementPublication relation-card" id="fetchUsers">
                 <h5 class="card-header">
@@ -40,10 +47,9 @@
                     </a>
                     {% endif %}
 
-                    {% if titre_page == 'Utilisateurs inscrits' and isConnected and utilisateur.iduser != user.utilisateur.iduser %}
-                    {% set inrelation = false %}
-                    {% for relation in rellist.relations %}
-                    {% if utilisateur.iduser in relation %}
+                    {% if (titre_page == 'Utilisateurs inscrits' and isConnected and utilisateur.iduser != user.utilisateur.iduser)
+                        or (titre_page == 'Relations' and utilisateur.iduser != profile.utilisateur.iduser and profile.utilisateur.iduser == user.utilisateur.iduser ) %}
+                    {% if inrelation == true %}
                     <a title="Retirer des relations" class="bouton-relation btn-remove-relation">
                         <input type="hidden" value="{{utilisateur.iduser}}" class="valueUser">
                         <input type="hidden" value="{{user.utilisateur.iduser}}" class="valueSelf">
@@ -51,9 +57,7 @@
                             <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
                         </svg>
                     </a>
-                    {% set inrelation = true %}
                     {% endif %}
-                    {% endfor %}
                     {% if inrelation == false %}
                     <a title="Se mettre en relation" class="bouton-relation btn-relation">
                         <input type="hidden" value="{{utilisateur.iduser}}" class="valueUser">
@@ -123,9 +127,9 @@
                     {% endif %}
                 </div>
             </div>
-            
         </div>
-    {% endfor %}
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
 

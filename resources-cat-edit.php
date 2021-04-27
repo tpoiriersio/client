@@ -7,10 +7,12 @@ if ($user['utilisateur']['issuperadmin'] == false && $user['utilisateur']['isadm
     header('Location: home.php');
 }
 else {
-    echo $twig->render('resources-cat-new.tpl', [
-        'titre_page' => 'Nouvelle catégorie',
+    echo $twig->render('resources-cat-edit.tpl', [
+        'titre_page' => 'Modifier catégorie',
         'isConnected' => $isConnected,
         'user' => $user,
+        'idcatres' => $_GET['idcatres'],
+        'libellecatres' => $_GET['libellecatres'],
         'token' => $_SESSION['jwtToken']
     ]);
 }
