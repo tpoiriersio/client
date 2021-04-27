@@ -28,10 +28,10 @@
                 <hr>
                 <p class="card-text">{{ ressource.ressource.messageressource }}</p>
                 <hr>
-                {% if ressource.ressource.isverified == true %}
+                {% if ressource.ressource.isverified == true and isConnected == true %}
                 <!-- Afficher ces actions si la ressource est validée / visible publiquement -->
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#like"/></svg>
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#comment"/></svg>
+                <a href="#comment-post"><svg class="bi me-2" width="16" height="16"><use xlink:href="#comment"/></svg></a>
                 <a title="Inviter à participer" class="btn-invite">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#share"/></svg>
                 </a>
@@ -78,6 +78,17 @@
                                 <p class="m-b-5 m-t-10">
                                     {{ comment.contenucommentaire }}
                                 </p>
+                                {% if comment.iduser == user.utilisateur.iduser
+                                or user.utilisateur.issuperadmin
+                                or user.utilisateur.isadmin
+                                or user.utilisateur.ismoderateur
+                                %}
+                                <a id="{{ comment.idcommentaire }}" title="Supprimer définitivement" class="bouton-ressource btn-delete-comment">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                    </svg>
+                                </a>
+                                {% endif %}
                             </div>
                         </div>
                         {% endif %}
@@ -100,44 +111,9 @@
     {% endif %}
 </div>
 
-<div id="relation-window" class="container-fluid">
-    <input id="reluserid" type="hidden" value="" class="valueUser">
-    <input id="relownid" type="hidden" value="" class="valueUser">
-    <div class="container">
-        <div class="card placementPublication relation-card">
-            <div class="card-header">
-                <h5>Choisir une relation à inviter</h5>
-                <div id="close-relation-window">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="card-body">
-                <select name="TypRel" class="form-control mb-2" id="selectTypRel">
-                    <option value="">Choisissez une personne</option>
-                    {% for key, utilisateur in userslist.utilisateurs %}
-                    {% set inrelation = false %}
-                    {% for relation in rellist.relations %}
-                    {% if utilisateur.iduser in relation %}
-                    <option value="{{ utilisateur.iduser }}">{{ utilisateur.prenomuser }} {{ utilisateur.nomuser }}
-                        {% for relation in rellist.relations %}
-                        {% if relation.iduser == utilisateur.iduser %}
-                         ({{ relation.libelletyprel }})
-                        {% endif %}
-                        {% endfor %}</option>
-                    {% endif %}
-                    {% endfor %}
-                    {% endfor %}
-                </select>
-                <button type="button" class="btn btn-primary" id="register">Valider</button>
+{{ include('elements/relations-window.tpl') }}
 
-            </div>
-        </div>
-    </div>
-</div>
-
+<script src="js/relation-invite.js"></script>
 
 <script>
     $( document ).ready(function() {
@@ -202,20 +178,6 @@
             });
         });
 
-        // -- Afficher fenêtre relations --
-        $(".btn-invite").click(function() {
-            var userId = $(this).children(".valueUser").val();
-            var myId = $(this).children(".valueSelf").val();
-            $( "#relation-window" ).show();
-            $( "#reluserid").val(userId) ;
-            $( "#relownid").val(myId) ;
-        });
-
-        // -- Fermer la fenêtre relations --
-        $("#close-relation-window").click(function() {
-            $( "#relation-window" ).hide();
-        });
-
         // -- Ajout de commentaire -- 
         $("#addCommentaire").click(function() {
             var contenu = $("#valueCommentaire").val();
@@ -236,6 +198,32 @@
                 success : function(json){
                     alert('Commentaire ajouté avec succès');
                     location.reload();
+                },
+                error: function (result, status, err) {
+                    alert('Erreur : ' + result.responseText);
+                }
+            });
+        });
+
+        // Suppression de commentaire
+        $( ".btn-delete-comment" ).click(function() {
+            var token = $("#token").val();
+            var tokenParse = JSON.parse(token);
+            var id = this.id;
+            console.log(id);
+            $.ajax({
+                type : 'DELETE',
+                url : 'http://localhost:5000/res/comm/delete/' + id,
+                data: {
+                    "id": id
+                },
+                dataType : 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", 'Bearer '+ tokenParse.jwtToken);
+                },
+                success : function(json){
+                    alert('Le commentaire a été supprimé.');
+                    document.location.reload();
                 },
                 error: function (result, status, err) {
                     alert('Erreur : ' + result.responseText);
