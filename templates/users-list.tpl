@@ -3,7 +3,7 @@
 {{ include('elements/left-sidebar.tpl') }}
 
 <div class="col order-3 order-md-2">
-    <p>Rechercher un utilisateur :</p>
+    <p class="libelleRecherche">Rechercher un utilisateur :</p>
     <input id="myInput" type="text" class="form-control" placeholder="Nom ou prénom">
     {{ include('elements/users.tpl') }}
 </div>

@@ -32,10 +32,9 @@ body {
     /*overflow:hidden;*/
     background-color: #fafafa;
 }
-p{
+.libelleRecherche{
     margin-top: 50px !important;
 }
-
 .bodyIndex{
    /* background: -moz-linear-gradient(270deg, rgba(34,46,64,1) 0%, rgba(81,195,184,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(34,46,64,1)), color-stop(100%, rgba(81,195,184,1)));
@@ -942,7 +941,6 @@ input {
 }
 
 .form-control{
-    border: 1px rgba(0, 0, 0, .25) !important;
     border-radius: 9px;
     box-shadow: 2px 4px 4px rgba(0,0,0,.25);
 }

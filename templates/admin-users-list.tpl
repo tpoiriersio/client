@@ -4,7 +4,7 @@
 
 <div class="col order-3 order-md-2">
     {{ include('elements/admin-header.tpl') }}
-    <p>Rechercher un utilisateur :</p>
+    <p class="libelleRecherche">Rechercher un utilisateur :</p>
     <input id="myInput" type="text" placeholder="Nom ou prénom" class="form-control">
     {{ include('elements/users.tpl') }}
 </div>
