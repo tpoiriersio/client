@@ -148,8 +148,11 @@ function inscription(){
         },
         dataType : 'JSON',
         success : function(json){
-            $jsonstring = JSON.stringify(json);
-            window.location.href = './login.php?token=' + $jsonstring + '&email=' + email;
+            /*$jsonstring = JSON.stringify(json);
+            window.location.href = './login.php?token=' + $jsonstring + '&email=' + email;*/
+            alert('Inscription complétée. Vous pouvez désormais vous connecter');
+            window.location.reload();
+
         },
         error: function (result, status, err) {
             alert('Erreur : ' + result.responseText);
