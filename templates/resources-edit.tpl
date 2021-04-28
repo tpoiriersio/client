@@ -26,7 +26,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12">
-                    <label for="inputDuree" class="form-label">Durée (minutes)</label>
+                    <label for="inputDuree" class="form-label">Durée (heures)</label>
                     <input type="number" name="duree" class="form-control" id="inputDuree" value="{{ ressource.ressource.dureeressource }}">
                 </div>
             </div>

@@ -155,8 +155,12 @@ $(".deleteUtilisateur").click(function() {
         },*/
         dataType : 'json',
         success : function(json){
-            console.log(json);
+            alert('L\'utilisateur a été supprimé.');
+            location.reload();
         },
+        error: function (result, status, err) {
+            alert('Erreur : ' + result.responseText);
+        }
     });
 });
 

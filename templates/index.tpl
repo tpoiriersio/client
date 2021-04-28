@@ -62,8 +62,9 @@
                                 <input type="text" class="input" id="user_address" name="adresse" autocomplete="off" placeholder="Adresse">
                                 <input type="text" class="input" id="user_country" name="pays" autocomplete="off" placeholder="Pays">
                                 <input type="text" class="input" id="user_situation" name="situation" autocomplete="off" placeholder="Situation">
-                                <label>Handicapé</label>
+                                <!--<label>Handicapé</label>
                                 <input type="checkbox" class="input" id="user_handicap" name="handicap" placeholder="Handicap">
+                                -->
 
                                 <input type="button" class="button" value="S'INSCRIRE"  onclick="inscription()">
                             </form>

@@ -46,8 +46,8 @@ CREATE TABLE ressource (
     commentaires uuid [],
     isVerified boolean,
     idAuteur uuid REFERENCES utilisateur (idUser) ON DELETE CASCADE,
-    idTypRes int REFERENCES  type_ressource(idTypRes)  ON DELETE CASCADE ,
-    idCatRes int REFERENCES categorie_ressource (idCatRes)  ON DELETE CASCADE 
+    idTypRes int REFERENCES  type_ressource(idTypRes) ON DELETE CASCADE,
+    idCatRes int REFERENCES categorie_ressource (idCatRes) ON DELETE CASCADE 
 );
 
 /* Tables utilisateur, admin, superardmin, et moderateur  ------------------------------------- */
@@ -78,9 +78,9 @@ CREATE TABLE type_relation (
 
 CREATE TABLE relation (
   idRelation uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
-  idUser1 uuid REFERENCES utilisateur (idUser) NOT NULL  ON DELETE CASCADE ,
-  idUser2 uuid REFERENCES utilisateur (idUser) NOT NULL  ON DELETE CASCADE ,
-  idTypRel INT REFERENCES type_relation (idTypRel) NOT NULL  ON DELETE CASCADE 
+  idUser1 uuid REFERENCES utilisateur (idUser) ON DELETE CASCADE,
+  idUser2 uuid REFERENCES utilisateur (idUser) ON DELETE CASCADE,
+  idTypRel INT REFERENCES type_relation (idTypRel) ON DELETE CASCADE 
 );
 
 CREATE TABLE ressource_en_cours (
@@ -92,7 +92,7 @@ CREATE TABLE ressource_en_cours (
   dateDebutParticipation DATE DEFAULT CURRENT_DATE,
   dateFinParticipation DATE,
   isExploite boolean,
-  commentaires uuid [],
+  commentaires uuid []
 );
 
 /* Tables commentaire et favori ---------------------------------------------------------------- */
@@ -101,8 +101,8 @@ CREATE TABLE commentaire (
     idCommentaire uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     contenuCommentaire text NOT NULL,
     dateCommentaire date DEFAULT CURRENT_TIMESTAMP,
-    idUser uuid REFERENCES utilisateur (idUser) NOT NULL  ON DELETE CASCADE ,
-    idRessource uuid REFERENCES ressource (idRessource) NOT NULL  ON DELETE CASCADE 
+    idUser uuid REFERENCES utilisateur (idUser) ON DELETE CASCADE ,
+    idRessource uuid REFERENCES ressource (idRessource) ON DELETE CASCADE 
 );
 
 CREATE TABLE favori (

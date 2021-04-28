@@ -26,7 +26,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12">
-                    <label for="inputDuree" class="form-label">Durée (minutes)</label>
+                    <label for="inputDuree" class="form-label">Durée (heures)</label>
                     <input type="number" name="duree" class="form-control" id="inputDuree">
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     <select name="TypRes" class="form-control" id="selectTypRes">
                         <option value="">Choisissez un type</option>
                         {% for type in typelist.ressourceType %}
-                        <option value="{{ type.idtypres }}">{{ type.libelletypres }}</option>
+                        <option value="{{ type.idtypres }}">{{ type.libelletypres|replace({'‚' : 'é', '…' : 'à'}) }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -65,6 +65,7 @@
 
 <script>
 
+    // Enregistrement de la ressource
     $( document ).ready(function() {
         $("#register").click(function() {
             var titre = $("#inputTitre").val();
